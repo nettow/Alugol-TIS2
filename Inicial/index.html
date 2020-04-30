@@ -7,8 +7,8 @@
     <title>Alugol !</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="login.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
 </head>
 
 <body>
@@ -82,35 +82,7 @@
         </div>
     </div>
 
-    <script>
-        function checkLogin(form){
-            if(form.email.value == "jow" && form.password.value == "123")
-            window.open('/Inicial/bem-vindo.html')
-            else
-            alert("E-mail ou senha inválidos :'(");
-        }
-
-        function checkRegister(form){
-            if ((form.name.value).length < 3)
-            alert("Nome deve conter mais de 3 letras.");
-
-            if ((form.password.value).length < 6)
-            alert("Senha deve conter mais de 6 caracteres.");
-            
-        }
-
-        const signUpButton = document.getElementById('signUp');
-        const signInButton = document.getElementById('signIn');
-        const container = document.getElementById('container');
-
-        signUpButton.addEventListener('click', () => {
-            container.classList.add("right-panel-active");
-        });
-
-        signInButton.addEventListener('click', () => {
-            container.classList.remove("right-panel-active");
-        });
-    </script>
+    <script src="./script.js"></script>
 
     <!-- BOOTSTRAP -->
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

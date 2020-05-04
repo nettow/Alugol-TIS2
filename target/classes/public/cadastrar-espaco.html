@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- RECUPERAR DADOS
+<section class="section--container__responsive">
+
+  <section class="section--row__responsive">
+    <h1 class="generaltext">Consultar bem de consumo</h1>
+    <p>Consulta bem de consumo no estoque através de web service.</p>
+    <form onsubmit="addIdToPath('form-get')" method="get"
+      id="form-get">
+      <input class="input--down" type="text" id="id" value=""
+        placeholder="">
+        <input type="submit" value="consultar"
+        class="input--button input--consult__style">
+    </form>
+  </section>
+
+  <section class="section--row__responsive">
+    <h1 class="generaltext">Remover produto</h1>
+    <p>Remove bem de consumo do estoque.</p>
+    <form  onsubmit="addIdToPath('form-delete')" method="delete" id="form-delete">
+      <input class="input--down" type="text" id="id" value=""
+        placeholder="descrição do produto..."> <input type="submit"
+        value="remover" class="input--remove__style input--button">
+    </form>
+  </section>
+
+  <section class="section--row__responsive">
+    <h1 class="generaltext">Todos os produtos</h1>
+    <p>Recupera todos os bens de consumo do estoque.</p>
+    <form action="http://localhost:6789/quadras"  method="get" id="form-all">
+      <input type="submit"
+        value="todos" class="input--consult__style input--button">
+    </form>
+  </section>
+
+</section> -->
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Alugol - Cadastro de espaços</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="./perfil-proprietario.html">Voltar para o perfil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-success text-white">
+    <div class="container text-center col-lg-8">
+      <h1>Aqui você cadastrar seus espaços</h1>
+    </div>
+
+  </header>
+
+  <section id="filter">
+    <div class="container">
+      <div class="row">
+        <h2>Digite os campos:</h2>
+        <div class="col-lg-8 mx-auto">
+          <form class="form--register"
+				  action="http://localhost:6789/quadras" method="post"
+				  id="form-add">
+          <p>ID do proprietário</p>
+          <input class="form-control input--register" id="myInput" type="text" name="idProp"placeholder="Ex: 123..">
+          <br>
+          <p>Nome da quadra</p>
+          <input class="form-control input--register" id="myInput" type="text" name="nomeQuadra" placeholder="Ex: Quadra de praia..">
+          <br>
+          <p>Rua</p>
+          <input class="form-control input--register" id="myInput" type="text" name="rua" placeholder="Ex: Rua afonso..">
+          <br>
+          <p>Bairro</p>
+          <input class="form-control input--register" id="myInput" type="text" name="bairro" placeholder="Ex: Centro..">
+          <br>
+          <p>Cidade</p>
+          <input class="form-control input--register" id="myInput" type="text" name="cidade" placeholder="Ex: Belo Horizonte..">
+          <br>
+          <p>Modalidade</p>
+          <input class="form-control input--register" id="myInput" type="text" name="modalidade" placeholder="Ex: Quadra de tênis..">
+          <br>
+          <input type="submit"
+          value="Cadastrar espaço" class="btn btn-success input--main__style input--button">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="bg-light">
+    <div class="container">
+      <div class="row">
+        <h2>Espaços cadastrados:</h2>
+        <!-- Cards com espaços cadastrados -->
+        <div class="cardsCollection">
+
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="./css/vendor/jquery/jquery.min.js"></script>
+  <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+</html>

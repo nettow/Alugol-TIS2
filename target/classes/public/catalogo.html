@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Alugol - Procurar por Quadras</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="carregaPagina()">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="./perfil-jogador.html">Voltar para o perfil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-success text-white">
+    <div class="container text-center col-lg-8">
+      <h1>Aqui você pode procurar por quadras</h1>
+    </div>
+
+  </header>
+
+  <section id="services" class="bg-light">
+    <!-- Cards com as quadras disponiveis -->
+    <div class="container" id="cardsCollection">
+    </div>
+
+    <form action="http://localhost:6789/quadras?" method="GET">
+    
+    </form>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="./css/vendor/jquery/jquery.min.js"></script>
+  <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+
+<script>
+
+var request = new XMLHttpRequest();
+var requestURL = 'http://localhost:6789/getJsonTodasQuadras?'
+
+function carregaPagina(){
+
+  request.open('GET', requestURL);
+  request.responseType = 'json';
+  request.send();
+  request.onload = carregaQuadras;
+}
+
+
+function carregaQuadras() {
+  var quadras = request.response;
+  const div = document.getElementById('cardsCollection');
+  for (var i = 0; i <= quadras.length;i++){
+    div.innerHTML += `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
+      <h5>${quadras[i].modalidade}</h5>
+      <p class="card-title text-warning">Localizacao</p>
+      <p class="card-text">Rua: ${quadras[i].rua}</p>
+      <p class="card-text">Bairro: ${quadras[i].bairro}</p>
+      <p class="card-text">Cidade: ${quadras[i].cidade}</p>
+      <a href="#" class="btn btn-success">Ver mais +</a>
+    </div>
+  </div>`;
+    console.log(quadras);
+ }
+}
+
+
+
+  </script>
+</html>

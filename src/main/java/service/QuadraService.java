@@ -110,4 +110,9 @@ public class QuadraService {
         }
         return allProds;
     }
+
+    public void pesquisa(Request request,Response response){
+        String termo = request.params("palavra");
+        System.out.println(termo);
+    }
 }

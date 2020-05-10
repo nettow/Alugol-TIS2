@@ -28,6 +28,8 @@
         aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      <input type="text" id="termo" name="termo">
+      <button type="button" onclick="procuraQuadras()">Pesquisar</button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -90,6 +92,16 @@ function carregaPagina(){
 }
 
 
+function procuraQuadras(){
+
+  request.open('GET', requestURL);
+  request.responseType = 'json';
+  request.send();
+  request.onload = carregaQuadrasPesquisa;
+
+}
+
+
 function carregaQuadras() {
   var quadras = request.response;
   const div = document.getElementById('cardsCollection');
@@ -102,13 +114,35 @@ function carregaQuadras() {
       <p class="card-text">Rua: ${quadras[i].rua}</p>
       <p class="card-text">Bairro: ${quadras[i].bairro}</p>
       <p class="card-text">Cidade: ${quadras[i].cidade}</p>
-      <a href="#" class="btn btn-success">Ver mais +</a>
+      <a class="btn btn-success">Ver mais +</a>
     </div>
   </div>`;
     console.log(quadras);
  }
 }
 
+function carregaQuadrasPesquisa(){
+ var quadras = request.response;
+
+ var termo = document.getElementById('termo').value;
+  const div = document.getElementById('cardsCollection');
+  div.innerHTML = '';
+  for (var i = 0; i <= quadras.length;i++){
+  if(quadras[i].nomeQuadra.indexOf(termo)!==-1){
+    div.innerHTML += `<div class="card" style="width: 18rem;">
+    <div class="card-body">
+      <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
+      <h5>${quadras[i].modalidade}</h5>
+      <p class="card-title text-warning">Localizacao</p>
+      <p class="card-text">Rua: ${quadras[i].rua}</p>
+      <p class="card-text">Bairro: ${quadras[i].bairro}</p>
+      <p class="card-text">Cidade: ${quadras[i].cidade}</p>
+      <a href="#" class="btn btn-success">Ver mais +</a>
+    </div>
+  </div>`;
+  }
+ }
+}
 
 
   </script>

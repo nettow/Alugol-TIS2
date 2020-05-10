@@ -80,6 +80,11 @@ public class Aplicacao {
 
         get("/quadras/:id",((request, response) -> quadraService.get(request,response)));
 
+        get("/pesquisaQuadras",(request, response) -> {
+             quadraService.pesquisa(request, response);
+             return null;
+        });
+
         //put("/bensdeconsumo/:id", (request, response) -> clienteService.update(request, response));
 
         //delete("/clientes/:id", (request, response) -> clienteService.remove(request, response));

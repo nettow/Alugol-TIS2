@@ -88,22 +88,37 @@
 				  action="http://localhost:6789/quadras" method="post"
 				  id="form-add">
           <p>ID do proprietário</p>
-          <input class="form-control input--register" id="myInput" type="text" name="idProp"placeholder="Ex: 123..">
+          <input class="form-control input--register" id="myInput" type="text" name="idProp" placeholder="123..">
           <br>
           <p>Nome da quadra</p>
-          <input class="form-control input--register" id="myInput" type="text" name="nomeQuadra" placeholder="Ex: Quadra de praia..">
+          <input class="form-control input--register" id="myInput" type="text" name="nomeQuadra" placeholder="Quadra de praia..">
+          <br>
+          <p>Imagem do espaço</p>
+          <input class="form-control input--register" id="myInput" type="text" name="linkImagem" placeholder="www.site.com/imagem.png">
+          <br>
+          <p>Capacidade máxima de pessoas no espaço</p>
+          <input class="form-control input--register" id="myInput" type="number" name="capacidadeMaxima" placeholder="36">
+          <br>
+          <p>Resumo</p>
+          <input class="form-control input--register" id="myInput" type="text" name="resumo" placeholder="Digite uma breve descrição do espaço" maxlength="40">
+          <br>
+          <p>Descrição</p>
+          <input class="form-control input--register" id="myInput" type="text" name="descricao" placeholder="Descreva a quadra com o máximo de caracteristicas do espaço" maxlength="200">
+          <br>
+          <p>Valor da reserva</p>
+          <p>R$ </p><input class="form-control input--register" id="myInput" type="number" name="valorReserva" placeholder="R$ 70.00">
           <br>
           <p>Rua</p>
-          <input class="form-control input--register" id="myInput" type="text" name="rua" placeholder="Ex: Rua afonso..">
+          <input class="form-control input--register" id="myInput" type="text" name="rua" placeholder="Rua afonso . . . ">
           <br>
           <p>Bairro</p>
-          <input class="form-control input--register" id="myInput" type="text" name="bairro" placeholder="Ex: Centro..">
+          <input class="form-control input--register" id="myInput" type="text" name="bairro" placeholder="Centro . . .">
           <br>
           <p>Cidade</p>
-          <input class="form-control input--register" id="myInput" type="text" name="cidade" placeholder="Ex: Belo Horizonte..">
+          <input class="form-control input--register" id="myInput" type="text" name="cidade" placeholder="Belo Horizonte . . . ">
           <br>
           <p>Modalidade</p>
-          <input class="form-control input--register" id="myInput" type="text" name="modalidade" placeholder="Ex: Quadra de tênis..">
+          <input class="form-control input--register" id="myInput" type="text" name="modalidade" placeholder="Tênis, futebol, volei . . . ">
           <br>
           <input type="submit"
           value="Cadastrar espaço" class="btn btn-success input--main__style input--button">

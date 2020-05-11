@@ -76,19 +76,22 @@
 				  action="http://localhost:6789/clientes" method="post"
 				  id="form-add">
           <p>Nome </p>
-          <input class="form-control input--register" id="myInput" type="text" name="nome" placeholder="">
-          <br>
-          <p>CPF</p>
-          <input class="form-control input--register" id="myInput" type="text" name="CPF" placeholder="">
-          <br>
-          <p>E-mail</p>
-          <input class="form-control input--register" id="myInput" type="text" name="email" placeholder="example@company.com">
-          <br>
-          <p>Senha</p>
-          <input class="form-control input--register" id="myInput" type="password" name="password" placeholder="******">
+          <input class="form-control input--register" id="myInput" type="text" name="nome" placeholder="example: John">
           <br>
           <p>Idade</p>
-          <input class="form-control input--register" id="myInput" type="number" name="idade" placeholder="">
+          <input class="form-control input--register" id="myInput" type="number" name="idade" placeholder="example: 25">
+          <br>
+          <p>CPF</p>
+          <input class="form-control input--register" id="myInput" type="text" name="CPF" placeholder="example: 11122233344" pattern="[0-9]{12}">
+          <br>
+          <p>E-mail</p> 
+          <input class="form-control input--register" id="myInput" type="email" name="email" placeholder="example@company.com">
+          <br>
+          <p>Telefone</p> <!-- add backend -->
+          <input class="form-control input--register" id="myInput" type="tel" name="telefone" placeholder="example: 31988223344" pattern="[0-9]{12}">
+          <br>
+          <p>Senha</p>
+          <input class="form-control input--register" id="myInput" type="password" name="password" placeholder="*******">
           <br>
           <input type="submit"
           value="Cadastrar como esportista" class="btn btn-success input--main__style input--button">

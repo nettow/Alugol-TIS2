@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   <meta charset="utf-8">
@@ -44,26 +45,27 @@
       <div class="row">
         <h2>Digite os campos:</h2>
         <div class="col-lg-8 mx-auto">
-          <form class="form--register"
-				  action="http://localhost:6789/proprietarios" method="post"
-				  id="form-add">
-          <p>Nome </p>
-          <input class="form-control input--register" id="myInput" type="text" name="razaoSocial" placeholder="">
-          <br>
-          <p>CNPJ</p>
-          <input class="form-control input--register" id="myInput" type="text" name="CPNJ" placeholder="">
-          <br>
-          <p>E-mail</p>
-          <input class="form-control input--register" id="myInput" type="text" name="email" placeholder="example@company.com">
-          <br>
-          <p>Senha</p>
-          <input class="form-control input--register" id="myInput" type="password" name="senha" placeholder="******">
-          <br>
-          <p>Idade</p>
-          <input class="form-control input--register" id="myInput" type="number" name="idade" placeholder="">
-          <br>
-          <input type="submit"
-          value="Cadastrar como proprietário" class="btn btn-success input--main__style input--button">
+          <form class="form--register" action="http://localhost:6789/proprietarios" method="post" id="form-add">
+            <p>Nome</p>
+            <input class="form-control input--register" id="myInput" type="text" name="razaoSocial"
+              placeholder="Nome ou razão social">
+            <br>
+            <p>CNPJ</p>
+            <input class="form-control input--register" id="myInput" type="text" name="CNPJ" placeholder="">
+            <br>
+            <p>Telefone</p> <!-- add backend -->
+            <input class="form-control input--register" id="myInput" type="tel" name="telefone"
+              placeholder="example: 31988223344" pattern="[0-9]{12}">
+            <br>
+            <p>E-mail</p>
+            <input class="form-control input--register" id="myInput" type="email" name="email"
+              placeholder="example@company.com">
+            <br>
+            <p>Senha</p>
+            <input class="form-control input--register" id="myInput" type="password" name="senha" placeholder="******">
+            <br>
+            <input type="submit" value="Cadastrar como proprietário"
+              class="btn btn-success input--main__style input--button">
         </div>
       </div>
     </div>

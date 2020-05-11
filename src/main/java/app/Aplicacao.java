@@ -24,14 +24,14 @@ public class Aplicacao {
         });
 
         get("/loginCliente",(request, response) -> {
-           response.redirect("login-jogador.html");
+           response.redirect("login-cliente.html");
            return null;
         });
 
         post("/homeCliente",(request, response) -> {
             boolean loginCorreto = clienteService.loginCorreto(request);
             if(loginCorreto){
-                response.redirect("perfil-jogador.html");
+                response.redirect("perfil-cliente.html");
             }
             return null;
         });
@@ -45,7 +45,7 @@ public class Aplicacao {
         });
 
         get("/cadastrarCliente",(request, response) -> {
-             response.redirect("cadastrar-jogador.html");
+             response.redirect("cadastrar-cliente.html");
              return null;
         });
 
@@ -53,7 +53,7 @@ public class Aplicacao {
             boolean contaJaExiste = clienteService.contaExiste(request);
             if(!contaJaExiste){
                 clienteService.add(request, response);
-                response.redirect("perfil-jogador.html");
+                response.redirect("perfil-cliente.html");
             }
             return null;
         });

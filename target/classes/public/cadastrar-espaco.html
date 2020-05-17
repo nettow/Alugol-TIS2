@@ -52,7 +52,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="setarId()">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -88,7 +88,7 @@
 				  action="http://localhost:6789/quadras" method="post"
 				  id="form-add">
           <p>ID do proprietário</p>
-          <input class="form-control input--register" id="myInput" type="text" name="idProp" placeholder="123..">
+          <input class="form-control input--register" readonly="readonly" id="idProp" type="text" name="idProp"/>
           <br>
           <p>Nome da quadra</p>
           <input class="form-control input--register" id="myInput" type="text" name="nomeQuadra" placeholder="Quadra de praia..">
@@ -122,6 +122,7 @@
           <br>
           <input type="submit"
           value="Cadastrar espaço" class="btn btn-success input--main__style input--button">
+          </form>
         </div>
       </div>
     </div>
@@ -159,5 +160,12 @@
   <script src="js/scrolling-nav.js"></script>
 
 </body>
+<script>
 
+  function setarId(){
+    document.getElementById("idProp").value = sessionStorage.getItem('idProp');
+  }
+
+
+</script>
 </html>

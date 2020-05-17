@@ -57,6 +57,24 @@ public class ClienteDAO {
 		return false;
 	}
 
+	public Cliente getInfosCliente(int id){
+		for(Cliente cliente : clientes){
+			if(cliente.getId()==id){
+				return cliente;
+			}
+		}
+		return null;
+	}
+
+	public int getIdCliente(String email,String senha){
+		for(Cliente cliente : clientes){
+			if(cliente.getEmail().equals(email)&&cliente.getSenha().equals(senha)){
+				return cliente.getId();
+			}
+		}
+		return -1;
+	}
+
 	public boolean verificaLogin(String email,String senha){
 		for(Cliente cliente : clientes){
 			if(cliente.getEmail().equals(email)&&cliente.getSenha().equals(senha)){

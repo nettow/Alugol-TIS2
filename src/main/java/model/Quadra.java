@@ -10,11 +10,56 @@ public class Quadra implements Serializable,JsonFormatter{
     private int id;
     private int idProp;
     private String nomeQuadra;
+    private String urlEspaco;
+    private int capacidade;
+    private String resumo;
+    private String descricao;
+    private float valorReserva;
     private String rua;
     private String bairro;
     private String cidade;
     private String modalidade;
 
+
+    public String getUrlEspaco() {
+        return urlEspaco;
+    }
+
+    public void setUrlEspaco(String urlEspaco) {
+        this.urlEspaco = urlEspaco;
+    }
+
+    public int getCapacidade() {
+        return capacidade;
+    }
+
+    public void setCapacidade(int capacidade) {
+        this.capacidade = capacidade;
+    }
+
+    public String getResumo() {
+        return resumo;
+    }
+
+    public void setResumo(String resumo) {
+        this.resumo = resumo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public float getValorReserva() {
+        return valorReserva;
+    }
+
+    public void setValorReserva(float valorReserva) {
+        this.valorReserva = valorReserva;
+    }
 
     public int getIdProp() {
         return idProp;
@@ -76,29 +121,42 @@ public class Quadra implements Serializable,JsonFormatter{
         this.cidade = cidade;
     }
 
-    public Quadra(int id, int idProp,String nomeQuadra, String rua, String bairro, String cidade,String modalidade) {
+    public Quadra(int id, int idProp, String nomeQuadra, String urlEspaco, int capacidade, String resumo, String descricao, float valorReserva, String rua, String bairro, String cidade, String modalidade) {
         this.setId(id);
         this.setIdProp(idProp);
         this.setNomeQuadra(nomeQuadra);
+        this.setUrlEspaco(urlEspaco);
+        this.setCapacidade(capacidade);
+        this.setResumo(resumo);
+        this.setDescricao(descricao);
+        this.setValorReserva(valorReserva);
         this.setRua(rua);
         this.setBairro(bairro);
         this.setCidade(cidade);
         this.setModalidade(modalidade);
     }
 
-
-    /**
-     * M�todo sobreposto da classe Object. � executado quando um objeto precisa
-     * ser exibido na forma de String.
-     */
     @Override
     public String toString() {
-        return "Quadra:\n"+"Nome da Quadra: "+this.getNomeQuadra()+"\nRua: "+this.getRua()+"\nBairro: "+this.getBairro()+"\nCidade: "+this.getCidade()+"\nModalidade: "+this.getModalidade();
+        return "Quadra{" +
+                "id=" + id +
+                ", idProp=" + idProp +
+                ", nomeQuadra='" + nomeQuadra + '\'' +
+                ", urlEspaco='" + urlEspaco + '\'' +
+                ", capacidade=" + capacidade +
+                ", resumo='" + resumo + '\'' +
+                ", descricao='" + descricao + '\'' +
+                ", valorReserva=" + valorReserva +
+                ", rua='" + rua + '\'' +
+                ", bairro='" + bairro + '\'' +
+                ", cidade='" + cidade + '\'' +
+                ", modalidade='" + modalidade + '\'' +
+                '}';
     }
 
     @Override
     public boolean equals(Object obj) {
-        return (this.getId() == ((Cliente) obj).getId());
+        return (this.getId() == ((Quadra) obj).getId());
     }
 
     @Override
@@ -107,6 +165,11 @@ public class Quadra implements Serializable,JsonFormatter{
         obj.put("id", this.getId());
         obj.put("idProp", this.getIdProp());
         obj.put("nomeQuadra", this.getNomeQuadra());
+        obj.put("urlEspaco",this.getUrlEspaco());
+        obj.put("capacidade",this.getCapacidade());
+        obj.put("resumo",this.getResumo());
+        obj.put("descricao",this.getDescricao());
+        obj.put("valorReserva",this.getValorReserva());
         obj.put("rua", this.getRua());
         obj.put("bairro", this.getBairro());
         obj.put("cidade", this.getCidade());

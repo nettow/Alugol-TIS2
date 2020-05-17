@@ -22,14 +22,21 @@ public class QuadraService {
     }
 
     public Object add(Request request, Response response) {
+        System.out.println(request.queryParams("nomeQuadra"));
         int idProp = Integer.parseInt(request.queryParams("idProp"));
         String nomeQuadra = request.queryParams("nomeQuadra");
+        String linkImagem = request.queryParams("linkImagem");
+        int capacidadeQuadra = Integer.parseInt(request.queryParams("capacidadeQuadra"));
+        String resumoQuadra = request.queryParams("resumoQuadra");
+        String descricaoQuadra = request.queryParams("descricaoQuadra");
+        float valorReserva = Float.parseFloat(request.queryParams("valorReserva"));
         String rua = request.queryParams("rua");
         String bairro = request.queryParams("bairro");
         String cidade = request.queryParams("cidade");
         String modalidade = request.queryParams("modalidade");
         int id = quadraDAO.getMaxId() + 1;
-        Quadra quadra = new Quadra(id, idProp,nomeQuadra,rua,bairro,cidade,modalidade);
+
+        Quadra quadra = new Quadra(id,idProp,nomeQuadra,linkImagem,capacidadeQuadra,resumoQuadra,descricaoQuadra,valorReserva,rua,bairro,cidade,modalidade);
 
         quadraDAO.add(quadra);
 

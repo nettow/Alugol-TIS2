@@ -28,21 +28,9 @@ public class Aplicacao {
            return null;
         });
 
-        post("/homeCliente",(request, response) -> {
-            boolean loginCorreto = clienteService.loginCorreto(request);
-            if(loginCorreto){
-                response.redirect("perfil-cliente.html");
-            }
-            return null;
-        });
+        post("/homeCliente",(request, response) -> clienteService.loginCorreto(request,response));
 
-        post("/homeProprietario",(request, response) -> {
-            boolean loginCorreto = proprietarioService.loginCorreto(request);
-            if(loginCorreto){
-                response.redirect("perfil-proprietario.html");
-            }
-            return null;
-        });
+        post("/homeProprietario",(request, response) -> proprietarioService.loginCorreto(request,response));
 
         get("/cadastrarCliente",(request, response) -> {
              response.redirect("cadastrar-cliente.html");
@@ -58,6 +46,7 @@ public class Aplicacao {
             return null;
         });
 
+
         post("/proprietarios",(request, response) ->{
             boolean contaJaExiste = proprietarioService.contaExiste(request);
             if(!contaJaExiste){
@@ -71,6 +60,10 @@ public class Aplicacao {
             response.redirect("cadastrar-espaco.html");
             return null;
         });
+
+        get("/recuperaDadosCliente/:id",(request, response) -> clienteService.getInfoCliente(request,response));
+
+        get("/recuperaDadosProprietario/:id",(request, response) -> proprietarioService.getInfoProprietario(request,response));
 
         post("/quadras",((request, response) -> quadraService.add(request,response)));
 

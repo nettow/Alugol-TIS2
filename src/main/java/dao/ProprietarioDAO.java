@@ -48,14 +48,24 @@ public class ProprietarioDAO {
             return false;
         }
 
-        public int retornaID(String email, String senha){
+        public int getIdProprietario(String email,String senha){
             for(Proprietario proprietario : proprietarios){
                 if(proprietario.getEmail().equals(email)&&proprietario.getSenha().equals(senha)){
                     return proprietario.getId();
                 }
             }
-            return 0;
+            return -1;
         }
+
+        public Proprietario getInfosProprietario(int id){
+            for(Proprietario proprietario : proprietarios){
+                if(proprietario.getId()==id){
+                    return proprietario;
+                }
+            }
+            return null;
+        }
+
 
         public void add(Proprietario proprietario) {
             try {

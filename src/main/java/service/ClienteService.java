@@ -1,8 +1,12 @@
 package service;
 
+import com.google.gson.Gson;
 import dao.ClienteDAO;
 import model.Cliente;
+import model.LoginAux;
 import org.json.JSONArray;
+import org.json.JSONObject;
+
 import spark.Request;
 import spark.Response;
 
@@ -25,10 +29,41 @@ public class ClienteService {
 		String cpf = request.queryParams("CPF");
 		return clienteDAO.verificaContaExiste(email,cpf);
 	}
-	public boolean loginCorreto(Request request){
-		String email = request.queryParams("email");
-		String senha = request.queryParams("password");
-		return clienteDAO.verificaLogin(email,senha);
+	public Object loginCorreto(Request request,Response response)  {
+
+		Gson g = new Gson();
+		LoginAux login = g.fromJson(request.body(), LoginAux.class);
+
+		String email = login.getEmail();
+		String senha = login.getSenha();
+		JSONObject result = new JSONObject();
+		response.header("Content-Type", "application/json");
+		response.header("Content-Encoding", "UTF-8");
+		if(clienteDAO.verificaLogin(email,senha)){
+			result.put("loginCorreto",true);
+		}
+		else{
+			result.put("loginCorreto",false);
+		}
+		result.put("idCliente",clienteDAO.getIdCliente(email,senha));
+		return result;
+	}
+
+	public Object getInfoCliente(Request request,Response response){
+		response.header("Content-Type", "application/json");
+		response.header("Content-Encoding", "UTF-8");
+		int idCliente = Integer.parseInt(request.params(":id"));
+		System.out.println(idCliente);
+		JSONObject result = new JSONObject();
+		Cliente cliente = clienteDAO.getInfosCliente(idCliente);
+		if(cliente!=null){
+			result.put("nomeCliente",cliente.getNome());
+			result.put("emailCliente",cliente.getEmail());
+			result.put("cpfCliente",cliente.getCPF());
+			result.put("idadeCliente",cliente.getIdade());
+		}
+		return result;
+
 	}
 	public Object add(Request request, Response response) {
 		String nome = request.queryParams("nome");
@@ -45,6 +80,8 @@ public class ClienteService {
 		response.status(201); // 201 Created
 		return id;
 	}
+
+
 
 	public Object get(Request request, Response response) {
 		int id = Integer.parseInt(request.params(":id"));

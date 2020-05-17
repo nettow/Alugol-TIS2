@@ -18,7 +18,7 @@
 
 </head>
 
-<body id="page-top">
+<body id="page-top" onload="getInfosProprietario()">
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -99,5 +99,28 @@
   <script src="js/scrolling-nav.js"></script>
 
 </body>
+
+
+<script>
+
+  function getInfosProprietario(){
+
+    let idProp = sessionStorage.getItem('idProp');
+    var http = new XMLHttpRequest();
+    var url = 'http://localhost:6789/recuperaDadosProprietario/'+idProp;
+    http.open('GET', url,true);
+    http.send();
+
+    http.onload = function() {
+        var dados = http.response;
+        var obj = JSON.parse(dados);
+        console.log(obj.razaoSocial);
+        console.log(obj.emailProp);
+        console.log(obj.cpnjProp);
+    }
+  }
+
+</script>
+
 
 </html>

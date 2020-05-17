@@ -12,13 +12,23 @@
 
   <!-- Bootstrap core CSS -->
   <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap core JavaScript -->
+  <script src="./css/vendor/jquery/jquery.min.js"></script>
+  <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Plugin JavaScript -->
+  <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
   <!-- Custom styles for this template -->
   <link href="css/scrolling-nav.css" rel="stylesheet">
+
 
 </head>
 
 <body id="page-top">
+
 
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
@@ -42,16 +52,17 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
-          <form class="form--register" action="http://localhost:6789/homeCliente" method="POST" id="form-add">
+          <form class="form--register" id="form-add">
           <a href="./login-proprietario.html">Sou proprietário de quadra</a>
-          <br><br>
+          <br>
           <p>E-mail</p>
-          <input class="form-control input--register" id="myInput" type="text" name="email" placeholder="example@company.com">
+          <input class="form-control input--register" id="email" type="text" name="email" placeholder="example@company.com">
           <br>
           <p>Senha</p>
-          <input class="form-control input--register" id="myInput" type="password" name="password">
+          <input class="form-control input--register" id="pass" type="password" name="password">
           <br>
-          <input type="submit" value="Entrar" class="btn btn-success input--main__style input--button">
+            <button class="btn btn-success input--main__style input--button" type="button" onclick="realizalogin()">Entrar</button>
+          </form>
         </div>
       </div>
     </div>
@@ -62,20 +73,42 @@
   <footer class="py-5 bg-dark">
     <div class="container">
       <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+      <div id="id"></div>
     </div>
     <!-- /.container -->
   </footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="./css/vendor/jquery/jquery.min.js"></script>
-  <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Plugin JavaScript -->
-  <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom JavaScript for this theme -->
-  <script src="js/scrolling-nav.js"></script>
 
 </body>
+
+<script>
+
+  function realizalogin(){
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("pass").value;
+    var data = {};
+    data.email = email;
+    data.senha  = senha;
+    var json = JSON.stringify(data);
+    var http = new XMLHttpRequest();
+    var url = 'http://localhost:6789/homeCliente';
+    http.open('POST', url, true);
+    http.send(json);
+
+    http.onload = function() {
+        var login = http.response;
+        var obj = JSON.parse(login);
+        if(obj.loginCorreto){
+          sessionStorage.setItem('idCliente', obj.idCliente);
+          location.href="perfil-cliente.html";
+        }
+        else{
+            alert("Seu login esta incorreto!!! Tente novamente, por favor.");
+        }
+    }
+
+}
+
+  </script>
 
 </html>

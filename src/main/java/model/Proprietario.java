@@ -12,8 +12,15 @@ public class Proprietario implements Serializable,JsonFormatter {
     private String razaoSocial;
     private String email;
     private String senha;
-    private int idade;
+    private String telefone;
 
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
 
     public static long getSerialVersionUID() {
         return serialVersionUID;
@@ -59,21 +66,15 @@ public class Proprietario implements Serializable,JsonFormatter {
         this.senha = senha;
     }
 
-    public int getIdade() {
-        return idade;
-    }
 
-    public void setIdade(int idade) {
-        this.idade = idade;
-    }
 
-    public Proprietario(int id, String CPNJ, String razaoSocial, String email, String senha, int idade) {
+    public Proprietario(int id, String CPNJ, String razaoSocial, String email, String senha,String telefone) {
         this.setId(id);
         this.setCPNJ(CPNJ);
         this.setRazaoSocial(razaoSocial);
         this.setEmail(email);
         this.setSenha(senha);
-        this.setIdade(idade);
+        this.setTelefone(telefone);
     }
 
     /**
@@ -82,12 +83,12 @@ public class Proprietario implements Serializable,JsonFormatter {
      */
     @Override
     public String toString() {
-        return "Proprietario:\n"+"Nome: "+this.getRazaoSocial()+"\nEmail: "+this.getEmail()+"\nCPF:"+this.getCPNJ()+"\nSenha: "+this.getSenha()+"\nIdade: "+this.getIdade();
+        return "Proprietario:\n"+"Nome: "+this.getRazaoSocial()+"\nEmail: "+this.getEmail()+"\nCPF:"+this.getCPNJ()+"\nSenha: "+this.getSenha()+"\nTelefone: "+this.getTelefone();
     }
 
     @Override
     public boolean equals(Object obj) {
-        return (this.getId() == ((Cliente) obj).getId());
+        return (this.getId() == ((Proprietario) obj).getId());
     }
 
     @Override
@@ -98,7 +99,7 @@ public class Proprietario implements Serializable,JsonFormatter {
         obj.put("razaoSocial", this.getRazaoSocial());
         obj.put("email", this.getEmail());
         obj.put("senha", this.getSenha());
-        obj.put("idade", this.getIdade());
+        obj.put("telefone",this.getTelefone());
         return obj;
     }
 

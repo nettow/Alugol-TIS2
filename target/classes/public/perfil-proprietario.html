@@ -30,7 +30,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="./cadastrar-espaco.html">...</a>
+            <a class="nav-link js-scroll-trigger" onclick="fazerLogout()">Logout</a>
           </li>
         </ul>
       </div>
@@ -39,9 +39,9 @@
   <header class="bg-success text-white">
     <div class="container text-center">
       
-      <h1>Perfil do proprietário</h1>
+      <h1 id="nome"></h1>
       <img src="./imgs/user.png" alt="Foto do usuario" width="100px">
-      <p>. . .</p>
+      <p></p>
     </div>
     
   </header>
@@ -51,8 +51,9 @@
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>Você pode:</h2>
-          <p class="lead"><a href="/cadastrarEspaco">Cadastrar espaços</a></p>
-          <p class="lead"><a href="../pages/landingPage/index.html">Encerrrar sessão</a></p>
+          <p class="lead"><a class="nav-link js-scroll-trigger"  href="/cadastrarEspaco">Cadastrar espaços</a></p>
+          <p class="lead"><a class="nav-link js-scroll-trigger" href="./consulta-quadras.html">Minhas Quadras</a></p>
+          <p class="lead"><a class="nav-link js-scroll-trigger" href="#" onclick="fazerLogout()">Encerrar sessão</a></p>
         </div>
       </div>
     </div>
@@ -114,12 +115,19 @@
     http.onload = function() {
         var dados = http.response;
         var obj = JSON.parse(dados);
-        console.log(obj.razaoSocial);
-        console.log(obj.emailProp);
-        console.log(obj.cpnjProp);
+        document.getElementById("nome").innerHTML += obj.razaoSocial;
+        // console.log(obj.razaoSocial);
+        // console.log(obj.emailProp);
+        // console.log(obj.cpnjProp);
     }
   }
 
+
+
+  function fazerLogout(){
+    sessionStorage.removeItem('idProp');
+    location.href="index.html";
+  }
 </script>
 
 

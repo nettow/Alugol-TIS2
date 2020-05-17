@@ -12,7 +12,8 @@
     <nav class="navBar">
         <div id="titulo"><a href="#apr">AluGol</a></div>
         <div id="btn">
-            <button class="botaoEntrar" id="btnEntrarNav"><a href="/loginCliente">Entrar</a></button>
+            <button class="botaoEntrar" id="btnEntrarNav">Entrar</a></button>
+            <button class="botaoEntrar" id="btnEntrarNav" onclick="opcoesCadastro()">Cadastrar</a></button>
         </div>
         <!-- <ul>
             <li> <a href="#apr">Inicio</a> </li>
@@ -23,15 +24,18 @@
     <div class="apresentacao" id="apr">
         <div id="textoApr">
             <h1 id="tituloAluGolLP" >AluGol</h1>
-            <p>A melhor plataforma pra voce não ficar parado, venha logo se juntar a nos!<br>A maioria dos usuarios quando entra não querem parar de praticar esportes</p>
+            <p>A melhor plataforma pra voce não ficar parado, junte-se a nós.<br> Aqui você pratica esportes, se diverte e ainda faz amizades para a vida toda !</p>
             <button class="botaoEntrar" id="btnEntrarApr"><a href="/loginCliente">Entrar</a></button>
+            <button class="botaoEntrar" id="btnEntrarNav" onclick="opcoesCadastro()">Cadastrar</a></button>
+            <p id="cadastrar" id="redirect"></p>
         </div>
     </div>
 
     <div class="oqOferecemos" id="oqOf">
         <div id="textoOqOf">
             <h1 id="tituloOqOf">O que oferecemos</h1>
-            <p>Quadras confiaveis, com preço justo e qualidade para seu lazer esportivo!<br>Venha fazer um teste e fique conosco sempre praticando seus esportes favoritos!</p>
+            <p>Quadras confiaveis, com preço justo e qualidade para seu lazer esportivo!<br>Venha fazer um teste e pratique conosco seus esportes favoritos!</p>
+            <p id="cadastrar"></p>
         </div>
     </div>
 
@@ -42,5 +46,11 @@
     <a href="../cadastrar-proprietario.html">Cadastrar-se como PROPRIETÁRIO</a>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <script src="main.js"></script>
+    
+    <script language=javascript type="text/javascript">
+    function opcoesCadastro(){
+        document.getElementById("cadastrar").innerHTML = `<h3>Cadastrar-se como:</h3><button class="botaoEntrar"><a href="/cadastrarCliente">Cliente</a></button><br><br><button class="botaoEntrar"><a href="../cadastrar-proprietario.html">Proprietário</a></button>`
+    }
+        </script>
 </body>
 </html>

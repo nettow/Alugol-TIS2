@@ -24,12 +24,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
       <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <input type="text" id="termo" name="termo">
-      <button type="button" onclick="procuraQuadras()">Pesquisar</button>
+
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
@@ -43,6 +38,9 @@
   <header class="bg-success text-white">
     <div class="container text-center col-lg-8">
       <h1>Aqui você pode procurar por quadras</h1>
+      <p>Nome, endereço, modalidade . . . </p>
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" id="termo" name="termo" aria-label="Search"><br>
+      <button type="button" class="button btn-warning btn" onclick="procuraQuadras()">Pesquisar</button>
     </div>
 
   </header>
@@ -52,9 +50,7 @@
     <div class="container" id="cardsCollection">
     </div>
 
-    <form action="http://localhost:6789/quadras?" method="GET">
-    
-    </form>
+
   </section>
 
 
@@ -104,19 +100,19 @@ function procuraQuadras(){
 
 function carregaQuadras() {
   var quadras = request.response;
+  console.log(quadras);
   const div = document.getElementById('cardsCollection');
   for (var i = 0; i <= quadras.length;i++){
     div.innerHTML += `<div class="card" style="width: 18rem;">
     <div class="card-body">
       <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
-      <h5>${quadras[i].modalidade}</h5>
-      <p class="card-title text-warning">Localizacao</p>
-      <p class="card-text">Rua: ${quadras[i].rua}</p>
-      <p class="card-text">Bairro: ${quadras[i].bairro}</p>
-      <p class="card-text">Cidade: ${quadras[i].cidade}</p>
-      <a class="btn btn-success">Ver mais +</a>
+      <h5 style="float:right;">${quadras[i].modalidade}</h5>
+      <br>
+      <p class="card-text">${quadras[i].rua}, ${quadras[i].bairro}</p>
+      <p class="card-text">${quadras[i].cidade}</p>
+      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
     </div>
-  </div>`;
+  </div><br>`;
     console.log(quadras);
  }
 }
@@ -132,18 +128,21 @@ function carregaQuadrasPesquisa(){
     div.innerHTML += `<div class="card" style="width: 18rem;">
     <div class="card-body">
       <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
-      <h5>${quadras[i].modalidade}</h5>
-      <p class="card-title text-warning">Localizacao</p>
-      <p class="card-text">Rua: ${quadras[i].rua}</p>
-      <p class="card-text">Bairro: ${quadras[i].bairro}</p>
-      <p class="card-text">Cidade: ${quadras[i].cidade}</p>
-      <a href="#" class="btn btn-success">Ver mais +</a>
+      <h5 style="float:right;">${quadras[i].modalidade}</h5>
+      <br>
+      <p class="card-text">${quadras[i].rua}, ${quadras[i].bairro}</p>
+      <p class="card-text">${quadras[i].cidade}</p>
+      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
     </div>
-  </div>`;
+  </div><br>`;
   }
  }
 }
 
+function verDetalhesQuadra(id){
+  sessionStorage.setItem('idQuadraDetalhe',id);
+  location.href="detalhes-quadra.html";
+}
 
   </script>
 </html>

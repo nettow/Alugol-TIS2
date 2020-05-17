@@ -51,7 +51,7 @@ public class Aplicacao {
             boolean contaJaExiste = proprietarioService.contaExiste(request);
             if(!contaJaExiste){
                 proprietarioService.add(request,response);
-                response.redirect("perfil-proprietario.html");
+                response.redirect("login-proprietario.html");
             }
             return null;
         });
@@ -61,11 +61,19 @@ public class Aplicacao {
             return null;
         });
 
+        post("/deletaQuadra",(request, response) -> quadraService.remove(request,response));
+
         get("/recuperaDadosCliente/:id",(request, response) -> clienteService.getInfoCliente(request,response));
 
         get("/recuperaDadosProprietario/:id",(request, response) -> proprietarioService.getInfoProprietario(request,response));
 
-        post("/quadras",((request, response) -> quadraService.add(request,response)));
+        post("/quadras",(request, response) -> {
+            quadraService.add(request,response);
+            response.redirect("consulta-quadras.html");
+            return null;
+        });
+
+        get("/recuperaDetalhesQuadra/:id", (request, response) -> quadraService.get(request,response));
 
         get("/clientes/:id", (request, response) -> clienteService.get(request, response));
 
@@ -73,12 +81,14 @@ public class Aplicacao {
 
         get("/quadras/:id",((request, response) -> quadraService.get(request,response)));
 
+        get("/consultaQuadras/:idProp",(request, response) -> quadraService.getQuadrasProp(request,response));
+
         get("/pesquisaQuadras",(request, response) -> {
              quadraService.pesquisa(request, response);
              return null;
         });
 
-        //put("/bensdeconsumo/:id", (request, response) -> clienteService.update(request, response));
+        post("/editarQuadras/:id", (request, response) -> quadraService.update(request, response));
 
         //delete("/clientes/:id", (request, response) -> clienteService.remove(request, response));
 

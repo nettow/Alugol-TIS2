@@ -2,7 +2,7 @@ package service;
 
 import com.google.gson.Gson;
 import dao.ProprietarioDAO;
-import model.Cliente;
+
 import model.LoginAux;
 import model.Proprietario;
 import org.json.JSONArray;
@@ -78,7 +78,7 @@ public class ProprietarioService {
 
         proprietarioDAO.add(proprietario);
 
-        response.status(201); // 201 Created
+        //response.status(201); // 201 Created
         return id;
     }
 

@@ -1,10 +1,10 @@
 package service;
 
-import dao.ProprietarioDAO;
+import com.google.gson.Gson;
 import dao.QuadraDAO;
-import model.Proprietario;
 import model.Quadra;
 import org.json.JSONArray;
+import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
 
@@ -22,7 +22,7 @@ public class QuadraService {
     }
 
     public Object add(Request request, Response response) {
-        System.out.println(request.queryParams("nomeQuadra"));
+        System.out.println(request.queryParams("capacidadeQuadra"));
         int idProp = Integer.parseInt(request.queryParams("idProp"));
         String nomeQuadra = request.queryParams("nomeQuadra");
         String linkImagem = request.queryParams("linkImagem");
@@ -50,18 +50,20 @@ public class QuadraService {
         Quadra quadra = quadraDAO.get(id);
 
         if (quadra != null) {
-            response.header("Content-Type", "application/xml");
+            response.header("Content-Type", "application/json");
             response.header("Content-Encoding", "UTF-8");
+            JSONObject result = new JSONObject();
+            result.put("nomeQuadra",quadra.getNomeQuadra());
+            result.put("urlEspaco",quadra.getUrlEspaco());
+            result.put("capacidade",quadra.getCapacidade());
+            result.put("descricao",quadra.getDescricao());
+            result.put("valorReserva",quadra.getValorReserva());
+            result.put("rua",quadra.getRua());
+            result.put("bairro",quadra.getBairro());
+            result.put("cidade",quadra.getCidade());
+            result.put("modalidade",quadra.getModalidade());
 
-            return "<quadra>\n" +
-                    "\t<id> " + quadra.getId() + "</id>\n" +
-                    "\t<idProp> " + quadra.getIdProp() + "</idProp>\n" +
-                    "\t<nomeQuadra> " + quadra.getNomeQuadra() + "</nomeQuadra>\n" +
-                    "\t<rua> " + quadra.getRua() + "</rua>\n" +
-                    "\t<bairro> " + quadra.getBairro() + "</bairro>\n" +
-                    "\t<cidade> " + quadra.getCidade() + "</cidade>\n" +
-                    "\t<modalidade> " + quadra.getModalidade() + "</modalidade>\n" +
-                    "</quadra>\n";
+            return result;
         } else {
             response.status(404); // 404 Not found
             return "Quadra " + id + " não encontrado.";
@@ -73,28 +75,48 @@ public class QuadraService {
 
     public Object update(Request request, Response response) {
         int id = Integer.parseInt(request.params(":id"));
+        Gson g = new Gson();
+        Quadra quadraAux = g.fromJson(request.body(), Quadra.class);
+        System.out.println(quadraAux.getCapacidade());
+        System.out.println(quadraAux);
+        String nomeQuadra = quadraAux.getNomeQuadra();
+        String urlEspaco = quadraAux.getUrlEspaco();
+        int capacidade = quadraAux.getCapacidade();
+        String resumo = quadraAux.getResumo();
+        String descricao = quadraAux.getDescricao();
+        float valorReserva= quadraAux.getValorReserva();
+        String rua = quadraAux.getRua();
+        String bairro = quadraAux.getBairro();
+        String cidade= quadraAux.getCidade();
+        String modalidade = quadraAux.getModalidade();
 
-        Quadra quadra = (Quadra) quadraDAO.get(id);
+        Quadra quadra = quadraDAO.get(id);
 
         if (quadra != null) {
-            quadra.setNomeQuadra(request.queryParams("nomeQuadra"));
-            quadra.setRua(request.queryParams("rua"));
-            quadra.setBairro(request.queryParams("bairro"));
-            quadra.setCidade(request.queryParams("cidade"));
+            quadra.setNomeQuadra(nomeQuadra);
+            quadra.setUrlEspaco(urlEspaco);
+            quadra.setCapacidade(capacidade);
+            quadra.setResumo(resumo);
+            quadra.setDescricao(descricao);
+            quadra.setValorReserva(valorReserva);
+            quadra.setRua(rua);
+            quadra.setBairro(bairro);
+            quadra.setCidade(cidade);
+            quadra.setModalidade(modalidade);
             quadraDAO.update(quadra);
-
+            System.out.println(quadra);
             return id;
         } else {
             response.status(404); // 404 Not found
-            return "Proprietario não encontrado.";
+            return "Quadra não encontrada.";
         }
 
     }
 
     public Object remove(Request request, Response response) {
-        int id = Integer.parseInt(request.params(":id"));
-
-        Quadra quadra = (Quadra) quadraDAO.get(id);
+        int id = Integer.parseInt(request.body());
+        System.out.println(id);
+        Quadra quadra = quadraDAO.get(id);
 
         if (quadra != null) {
 
@@ -114,6 +136,20 @@ public class QuadraService {
         for (Quadra quadra : quadraDAO.getAll()) {
             Quadra quadra1 = quadra;
             allProds.put(quadra1.toJson());
+        }
+        return allProds;
+    }
+
+    public Object getQuadrasProp(Request request, Response response) {
+        int idProp = Integer.parseInt(request.params(":idProp"));
+        response.header("Content-Type", "application/json");
+        response.header("Content-Encoding", "UTF-8");
+        JSONArray allProds = new JSONArray();
+        for (Quadra quadra : quadraDAO.getAll()) {
+            if(quadra.getIdProp()==idProp){
+                Quadra quadra1 = quadra;
+                allProds.put(quadra1.toJson());
+            }
         }
         return allProds;
     }

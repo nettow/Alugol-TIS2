@@ -23,12 +23,10 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="./catalogo.html"> Voltar para o catálogo</a>
-
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="./perfil-cliente.html">Voltar para o perfil</a>
+            <p class="nav-link js-scroll-trigger">AluGol - 2020</p>
           </li>
         </ul>
       </div>
@@ -37,14 +35,14 @@
 
   <header class="bg-success text-white">
     <div class="container text-center col-lg-8">
-      <h1>Aqui você pode procurar por quadras</h1>
+      <h1 id="titulo">Detalhes da quadra - </h1>
     </div>
 
   </header>
 
 <section id="services" class="bg-light col">
     <div class="col-lg-8 content">
-        <h1 id="titulo"></h1><br>
+        <h1 id="titulo2"></h1><br>
         <p id="modalidade"></p>
         <p id="valorAluguel"></p>
         <img src="" style="max-width:300px" id="imagemQuadra"><br>
@@ -94,7 +92,8 @@
     function carregaResultado(){
         var dadosQuadra = request.response;
         console.log(dadosQuadra.bairro);
-        document.getElementById("titulo").innerHTML  = dadosQuadra.nomeQuadra;
+        document.getElementById("titulo").innerHTML  += dadosQuadra.nomeQuadra;
+        document.getElementById("titulo2").innerHTML  += dadosQuadra.nomeQuadra;
         document.getElementById("descricao").innerHTML  = "Sobre: "+dadosQuadra.descricao;
         document.getElementById("imagemQuadra").src = dadosQuadra.urlEspaco;
         document.getElementById("rua").innerHTML  = dadosQuadra.rua;

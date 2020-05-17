@@ -28,8 +28,6 @@
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <input type="text" id="termo" name="termo">
-        <button type="button" onclick="procuraQuadras()">Pesquisar</button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
@@ -41,10 +39,12 @@
 </nav>
 
 <header class="bg-success text-white">
-    <div class="container text-center col-lg-8">
-        <h1>Aqui estão suas quadras</h1>
-    </div>
-
+  <div class="container text-center col-lg-8">
+    <h1>Aqui estão suas quadras</h1>
+    <p>Você pode buscar por: Nome, endereço, modalidade . . . </p>
+    <input class="form-control mr-sm-2" type="text" placeholder="Search" id="termo" name="termo" aria-label="Search"><br>
+    <button type="button" class="button btn-warning btn" onclick="procuraQuadras()">Pesquisar</button>
+  </div>
 </header>
 
 <section id="services" class="bg-light">
@@ -197,7 +197,7 @@ function deletandoQuadra(){
 
 function verDetalhesQuadra(id){
   sessionStorage.setItem('idQuadraDetalhe',id);
-  location.href="detalhes-quadra.html";
+  window.open('detalhes-quadra.html','_blank') ;
 }
   </script>
 </html>

@@ -39,9 +39,9 @@
   <header class="bg-success text-white">
     <div class="container text-center">
       
-      <h1 id="nome"></h1>
       <img src="./imgs/user.png" alt="Foto do usuario" width="100px">
-      <p></p>
+      <h1 id="nome"></h1>
+      <p id="email"></p>
     </div>
     
   </header>
@@ -116,6 +116,7 @@
         var dados = http.response;
         var obj = JSON.parse(dados);
         document.getElementById("nome").innerHTML += obj.razaoSocial;
+        document.getElementById("email").innerHTML += obj.emailProp;
         // console.log(obj.razaoSocial);
         // console.log(obj.emailProp);
         // console.log(obj.cpnjProp);

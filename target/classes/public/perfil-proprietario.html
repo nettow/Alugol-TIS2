@@ -8,11 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Alugol - Meu perfil</title>
+  <title>AluGol - Meu perfil</title>
 
   <!-- Bootstrap core CSS -->
   <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
   <!-- Custom styles for this template -->
   <link href="css/scrolling-nav.css" rel="stylesheet">
 
@@ -23,84 +22,60 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" onclick="fazerLogout()">Logout</a>
-          </li>
-        </ul>
-      </div>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">AluGol - Perfil do Proprietário</a>
     </div>
   </nav>
-  <header class="bg-success text-white">
-    <div class="container text-center">
-      
-      <img src="./imgs/user.png" alt="Foto do usuario" width="100px">
-      <h1 id="nome"></h1>
-      <p id="email"></p>
-    </div>
-    
-  </header>
 
-  <section id="about">
+  <header>
     <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Você pode:</h2>
-          <p class="lead"><a class="nav-link js-scroll-trigger"  href="/cadastrarEspaco">Cadastrar espaços</a></p>
-          <p class="lead"><a class="nav-link js-scroll-trigger" href="./consulta-quadras.html">Minhas Quadras</a></p>
-          <p class="lead"><a class="nav-link js-scroll-trigger" href="#" onclick="fazerLogout()">Encerrar sessão</a></p>
+      <div class="container">
+        <div class="row">
+          <div class="col">
+            <h2 id="nome">Bem vindo(a), </h2><br>
+            <img src="./imgs/user.png" class="img-thumbnail" alt="Foto do usuario" width="100px">
+            <br><br>
+            <p class="text-danger">Sempre mantenha seus dados atualizados</p>
+            <p id="email">E-mail: </p>
+            <p id="cnpj">CNPJ: </p>
+          </div>
+          <div class="w-70"></div>
+          <div class="col">
+            <button class="btn btn-dark" onclick="location.href= './cadastrarEspaco'">Cadastrar espaço</button>
+            <br><br>
+            <button class="btn btn-dark" onclick="location.href= './consulta-quadras.html'">Minhas Quadras</button>
+            <br><br>
+            <button class="btn btn-dark" onclick="fazerLogout()">Encerrar sessão</button>
+            <p class="times"></p>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+    <div class="w-50"></div>
+  </div>
+  </header>
 
   <section id="services" class="bg-light">
     <div class="container">
       <div class="row">
         <div class="col-lg-8 mx-auto">
           <h2>Histórico de aluguéis</h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut optio velit inventore, expedita quo laboriosam possimus ea consequatur vitae, doloribus consequuntur ex. Nemo assumenda laborum vel, labore ut velit dignissimos.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Alguma coisa </h2>
-          <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero odio fugiat voluptatem dolor, provident officiis, id iusto! Obcaecati incidunt, qui nihil beatae magnam et repudiandae ipsa exercitationem, in, quo totam.</p>
+          <p class="lead">Estamos implementando essa nova feature!!!(Sprint 6)</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="py-5 bg-dark">
-    <div class="container">
+  <footer class="py-4 bg-dark">
       <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
-    </div>
-    <!-- /.container -->
   </footer>
 
   <!-- Bootstrap core JavaScript -->
   <script src="./css/vendor/jquery/jquery.min.js"></script>
   <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
   <!-- Plugin JavaScript -->
   <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-  <!-- Custom JavaScript for this theme -->
-  <script src="js/scrolling-nav.js"></script>
-
 </body>
-
 
 <script>
 
@@ -117,6 +92,7 @@
         var obj = JSON.parse(dados);
         document.getElementById("nome").innerHTML += obj.razaoSocial;
         document.getElementById("email").innerHTML += obj.emailProp;
+        document.getElementById("cnpj").innerHTML += obj.cpnjProp;
         // console.log(obj.razaoSocial);
         // console.log(obj.emailProp);
         // console.log(obj.cpnjProp);
@@ -130,6 +106,12 @@
     location.href="index.html";
   }
 </script>
-
-
+<style>
+    p{
+      font-size: larger;
+    }
+    *{
+      font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+</style>
 </html>

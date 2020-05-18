@@ -23,35 +23,31 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">AluGol</a>
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link js-scroll-trigger" href="./perfil-cliente.html">Voltar para o perfil</a>
+            <a class="nav-link js-scroll-trigger text-white" href="./perfil-cliente.html">Voltar para o perfil</a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <header class="bg-success text-white">
-    <div class="container text-center col-lg-8">
-      <h1>Aqui você pode procurar por quadras</h1>
-      <p>Pesquise por nome.</p>
-      <input class="form-control mr-sm-2" type="text" placeholder="Search" id="termo" name="termo" aria-label="Search"><br>
-      <button type="button" class="button btn-warning btn" onclick="procuraQuadras()">Pesquisar</button>
+  <header>
+    <div class="container  col-lg-8">
+      <h1>Pesquise uma quadra</h1>
+      <input class="form-control mr-sm-2" type="text" placeholder="Nome, endereço, esporte..." id="termo" name="termo" aria-label="Search"><br>
+      <button type="button" class="button btn-dark btn " onclick="procuraQuadras()">Pesquisar</button>
     </div>
 
   </header>
 
-  <section id="services" class="bg-light">
     <!-- Cards com as quadras disponiveis -->
     <div class="container" id="cardsCollection">
     </div>
 
-
-  </section>
 
 
   <!-- Footer -->
@@ -103,17 +99,18 @@ function carregaQuadras() {
   console.log(quadras);
   const div = document.getElementById('cardsCollection');
   for (var i = 0; i <= quadras.length;i++){
-    div.innerHTML += `<div class="card" style="width: 18rem;">
-    <div class="card-body">
-      <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
-      <h5 style="float:right;">${quadras[i].modalidade}</h5>
+    div.innerHTML += `
+    <div class="card-body card">
+      <h3 class="card-title" style="">${quadras[i].nomeQuadra}</h3>
+      <h5>${quadras[i].modalidade}</h5>
       <br>
-      <p class="card-text">${quadras[i].rua}, ${quadras[i].bairro}</p>
-      <p class="card-text">${quadras[i].cidade}</p>
-      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-    </div>
-  </div><br>`;
-    console.log(quadras);
+      <p class="card-text">${quadras[i].resumo}</p>
+      <img src="${quadras[i].urlEspaco}" style="max-width:15em;"></img><br>
+      <p class="card-text" style="text-align:right;">${quadras[i].rua}, ${quadras[i].bairro}</p>
+      <p class="card-text" style="text-align:right;">${quadras[i].cidade}</p>
+      <a class="btn btn-dark text-white" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
+    </div><br>`;
+    console.log(quadras[i].urlEspaco);
  }
 }
 
@@ -125,16 +122,15 @@ function carregaQuadrasPesquisa(){
   div.innerHTML = '';
   for (var i = 0; i <= quadras.length;i++){
   if(quadras[i].nomeQuadra.indexOf(termo)!==-1){
-    div.innerHTML += `<div class="card" style="width: 18rem;">
+    div.innerHTML += `<div class="card">
     <div class="card-body">
       <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
       <h5 style="float:right;">${quadras[i].modalidade}</h5>
       <br>
-      <p class="card-text">${quadras[i].rua}, ${quadras[i].bairro}</p>
+      <p class="card-text" >${quadras[i].rua}, ${quadras[i].bairro}</p>
       <p class="card-text">${quadras[i].cidade}</p>
-      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-    </div>
-  </div><br>`;
+      <a class="btn btn-dark text-white" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
+    </div><br>`;
   }
  }
 }

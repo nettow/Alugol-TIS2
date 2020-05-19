@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>AluGol - Login</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="./index.html">Alugol</a>
+    </div>
+  </nav>
+
+<header>
+  <div class="container">
+      <div class="row">
+        <div class="col">
+          <form class="form--register" id="form-add">
+            <h1>Jogador</h1>
+            <br>
+            <p>E-mail</p>
+            <input class="form-control input--register" id="email" type="text" name="email"
+              placeholder="personal@generic.com">
+            <br>
+            <p>Senha</p>
+            <input class="form-control input--register" id="pass" type="password" placeholder="******" name="password">
+            <br>
+            <button class="btn btn-dark input--main__style input--button" type="button"
+              onclick="realizaloginCliente()">Entrar</button>
+          </form>
+        </div>
+
+        <div class="col">
+          <h1>Proprietário</h1>
+          <form class="form--register" id="form-add">
+            <br>
+            <p>E-mail</p>
+            <input class="form-control input--register" id="email-prop" type="text" name="email"
+              placeholder="example@company.com">
+            <br>
+            <p>Senha</p>
+            <input class="form-control input--register" id="pass-prop" type="password" placeholder="******" name="password">
+            <br>
+            <button type="button" class="btn btn-dark input--main__style input--button"
+              onclick="realizaloginProprietario()">Entrar</button>
+          </form>
+        </div>
+
+      </div>
+  </div>
+</header>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark fixed-bottom">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+  </footer>
+
+</body>
+
+<script>
+
+  function realizaloginCliente(){
+    const email = document.getElementById("email").value;
+    const senha = document.getElementById("pass").value;
+    var data = {};
+    data.email = email;
+    data.senha  = senha;
+    var json = JSON.stringify(data);
+    var http = new XMLHttpRequest();
+    var url = 'http://localhost:6789/homeCliente';
+    http.open('POST', url, true);
+    http.send(json);
+
+    http.onload = function() {
+        var login = http.response;
+        var obj = JSON.parse(login);
+        if(obj.loginCorreto){
+          sessionStorage.setItem('idCliente', obj.idCliente);
+          location.href="perfil-cliente.html";
+        }
+        else{
+            alert("User não encontrado ! Confira seus dados.");
+        }
+    }
+
+}
+
+function realizaloginProprietario(){
+    const email = document.getElementById("email-prop").value;
+    const senha = document.getElementById("pass-prop").value;
+    var data = {};
+    data.email = email;
+    data.senha  = senha;
+    var json = JSON.stringify(data);
+    var http = new XMLHttpRequest();
+    var url = 'http://localhost:6789/homeProprietario';
+    http.open('POST', url, true);
+    http.send(json);
+
+    http.onload = function() {
+        var login = http.response;
+        var obj = JSON.parse(login);
+        console.log(login);
+        console.log(obj);
+        if(obj.loginCorreto){
+          sessionStorage.setItem('idProp', obj.idProp);
+          location.href="perfil-proprietario.html";
+        }
+        else{
+            alert("Proprietário não encontrado ! Confira seus dados.\nSe for jogador clique em 'Sou jogador'");
+        }
+    }
+}
+  </script>
+</html>

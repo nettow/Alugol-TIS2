@@ -24,7 +24,7 @@ public class Aplicacao {
         });
 
         get("/loginCliente",(request, response) -> {
-           response.redirect("login-cliente.html");
+           response.redirect("login.html");
            return null;
         });
 
@@ -51,7 +51,7 @@ public class Aplicacao {
             boolean contaJaExiste = proprietarioService.contaExiste(request);
             if(!contaJaExiste){
                 proprietarioService.add(request,response);
-                response.redirect("login-proprietario.html");
+                response.redirect("login.html");
             }
             return null;
         });

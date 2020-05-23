@@ -23,15 +23,16 @@ public class EquipeService {
 
     public Object add(Request request, Response response) {
         // System.out.println(request.queryParams("capacidadeequipe"));
-        int IdCliente = Integer.parseInt(request.queryParams("IdCliente"));
-        String nomequipe = request.queryParams("nomeequipe");
+        int IdCliente = Integer.parseInt(request.queryParams("idCliente"));
+        String nomequipe = request.queryParams("nomeEquipe");
 
-        Equipe equipe = new Equipe(nomequipe,IdCliente);
+        int id = equipeDAO.getMaxId() + 1;
+        Equipe equipe = new Equipe(nomequipe,IdCliente,id);
 
         equipeDAO.add(equipe);
 
         response.status(201); // 201 Created
-        return 999999;
+        return id;
     }
 
     public Object get(Request request, Response response) {
@@ -43,7 +44,7 @@ public class EquipeService {
             response.header("Content-Type", "application/json");
             response.header("Content-Encoding", "UTF-8");
             JSONObject result = new JSONObject();
-            result.put("nomeequipe",equipe.getNomeEquipe());
+            result.put("nomeEquipe",equipe.getNomeEquipe());
 
             return result;
         } else {
@@ -103,7 +104,7 @@ public class EquipeService {
         return allProds;
     }
 
-    public Object getequipesProp(Request request, Response response) {
+    public Object getEquipesProp(Request request, Response response) {
         int IdCliente = Integer.parseInt(request.params(":IdCliente"));
         response.header("Content-Type", "application/json");
         response.header("Content-Encoding", "UTF-8");

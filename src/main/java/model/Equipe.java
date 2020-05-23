@@ -39,7 +39,7 @@ public class Equipe implements Serializable,JsonFormatter{
         this.nomeEquipe = nomeEquipe;
     }
 
-    public Equipe(String nome,int idCliente) {
+    public Equipe(String nome,int idCliente, int id) {
         this.setId(id);
         this.setIdCliente(idCliente);
         this.setNomeEquipe(nome);
@@ -50,7 +50,7 @@ public class Equipe implements Serializable,JsonFormatter{
         return "Time{" +
                 "id=" + id +
                 ", idCliente=" + idCliente +
-                ", nomeTime='" + nomeEquipe + '\'' +
+                ", nomeEquipe='" + nomeEquipe + '\'' +
                 '}';
     }
 
@@ -62,9 +62,13 @@ public class Equipe implements Serializable,JsonFormatter{
     @Override
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
+        
+        obj.put("nomeEquipe", this.getNomeEquipe());
         obj.put("id", this.getId());
         obj.put("idCliente", this.getIdCliente());
-        obj.put("nomeTime", this.getNomeEquipe());
+        
+        System.out.println(obj);
+
         return obj;
     }
 

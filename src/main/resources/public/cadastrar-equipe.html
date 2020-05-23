@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>AluGol - Cadastro de equipes</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="setarId()">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="./perfil-cliente.html">Voltar para o perfil</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="bg-success text-white">
+    <div class="container text-center col-lg-8">
+      <h1>Aqui você cadastrar um time</h1>
+    </div>
+
+  </header>
+
+  <section id="filter">
+    <div class="container">
+      <div class="row">
+        <h2>Digite os campos:</h2>
+        <div class="col-lg-8 mx-auto">
+          <form class="form--register"
+				  action="http://localhost:6789/equipes" method="post"
+				  id="form-add">
+          <p>Nome equipe</p>
+          <input class="form-control input--register"  id="nomeequipe" type="nome" name="nome"/>
+          <br>
+          <input type="submit"
+          value="Cadastrar equipe" class="btn btn-success input--main__style input--button">
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="./css/vendor/jquery/jquery.min.js"></script>
+  <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  <!-- Custom JavaScript for this theme -->
+  <script src="js/scrolling-nav.js"></script>
+
+</body>
+<script>
+
+  function setarId(){
+    document.getElementById("idCliente").value = sessionStorage.getItem('idCliente');
+  }
+
+
+</script>
+</html>
+
+<!-- RECUPERAR DADOS
+<section class="section--container__responsive">
+
+  <section class="section--row__responsive">
+    <h1 class="generaltext">Consultar bem de consumo</h1>
+    <p>Consulta bem de consumo no estoque através de web service.</p>
+    <form onsubmit="addIdToPath('form-get')" method="get"
+      id="form-get">
+      <input class="input--down" type="text" id="id" value=""
+        placeholder="">
+        <input type="submit" value="consultar"
+        class="input--button input--consult__style">
+    </form>
+  </section>
+
+  <section class="section--row__responsive">
+    <h1 class="generaltext">Remover produto</h1>
+    <p>Remove bem de consumo do estoque.</p>
+    <form  onsubmit="addIdToPath('form-delete')" method="delete" id="form-delete">
+      <input class="input--down" type="text" id="id" value=""
+        placeholder="descrição do produto..."> <input type="submit"
+        value="remover" class="input--remove__style input--button">
+    </form>
+  </section>
+
+  <section class="section--row__responsive">
+    <h1 class="generaltext">Todos os produtos</h1>
+    <p>Recupera todos os bens de consumo do estoque.</p>
+    <form action="http://localhost:6789/quadras"  method="get" id="form-all">
+      <input type="submit"
+        value="todos" class="input--consult__style input--button">
+    </form>
+  </section>
+
+</section> -->

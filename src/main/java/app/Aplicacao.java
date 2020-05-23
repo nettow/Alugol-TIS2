@@ -2,6 +2,7 @@ package app;
 
 
 import service.ClienteService;
+import service.EquipeService;
 import service.ProprietarioService;
 import service.QuadraService;
 
@@ -11,7 +12,8 @@ public class Aplicacao {
 	
 	private static ClienteService clienteService = new ClienteService();
 	private static ProprietarioService proprietarioService = new ProprietarioService();
-	private static QuadraService quadraService = new QuadraService();
+    private static QuadraService quadraService = new QuadraService();
+    private static EquipeService equipeService = new EquipeService();
     public static void main(String[] args) {
         port(6789);
 
@@ -73,6 +75,14 @@ public class Aplicacao {
             return null;
         });
 
+        post("/equipes",(request, response) -> {
+            equipeService.add(request,response);
+            response.redirect("perfil-cliente.html");
+            return null;
+        });
+
+        get("/equipes/:id",((request, response) -> equipeService.get(request,response)));
+
         get("/recuperaDetalhesQuadra/:id", (request, response) -> quadraService.get(request,response));
 
         get("/clientes/:id", (request, response) -> clienteService.get(request, response));
@@ -98,6 +108,7 @@ public class Aplicacao {
         get("/proprietarios",((request, response) -> proprietarioService.getAll(request,response)));
 
         get("/quadras",((request, response) -> quadraService.getAll(request,response)));
+        get("/equipes",((request, response) -> equipeService.getAll(request,response)));
 
         //System.out.println("Pressione alguma tecla para terminar...");
         

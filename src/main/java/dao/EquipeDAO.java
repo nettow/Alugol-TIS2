@@ -1,13 +1,13 @@
 package dao;
 
-import model.Quadra;
+import model.Equipe;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuadraDAO {
-    private List<Quadra> quadras;
+public class EquipeDAO {
+    private List<Equipe> equipes;
     private int maxId = 0;
 
     private File file;
@@ -18,71 +18,71 @@ public class QuadraDAO {
         return maxId;
     }
 
-    public QuadraDAO(String filename) throws IOException {
+    public EquipeDAO(String filename) throws IOException {
 
         file = new File(filename);
-        quadras = new ArrayList<Quadra>();
+        equipes = new ArrayList<Equipe>();
         if (file.exists()) {
             readFromFile();
         }
 
     }
 
-    public void add(Quadra quadra) {
+    public void add(Equipe equipe) {
         try {
-            quadras.add(quadra);
-            this.maxId = (quadra.getId() > this.maxId) ? quadra.getId() : this.maxId;
+            equipes.add(equipe);
+            this.maxId = (equipe.getId() > this.maxId) ? equipe.getId() : this.maxId;
             this.saveToFile();
         } catch (Exception e) {
-            System.out.println("ERRO ao gravar o cliente '" + quadra.getNomeQuadra() + "' no disco!");
+            System.out.println("ERRO ao gravar o cliente '" + equipe.getNomeEquipe() + "' no disco!");
         }
     }
 
-    public Quadra get(int id) {
-        for (Quadra quadra : quadras) {
-            if (id == quadra.getId()) {
-                return quadra;
+    public Equipe get(int id) {
+        for (Equipe equipe : equipes) {
+            if (id == equipe.getId()) {
+                return equipe;
             }
         }
         return null;
     }
 
-    public void update(Quadra p) {
-        int index = quadras.indexOf(p);
+    public void update(Equipe equipe) {
+        int index = equipes.indexOf(equipe);
         if (index != -1) {
-            quadras.set(index, p);
+            equipes.set(index, equipe);
             this.saveToFile();
         }
     }
 
-    public void remove(Quadra p) {
-        int index = quadras.indexOf(p);
+    public void remove(Equipe p) {
+        int index = equipes.indexOf(p);
         if (index != -1) {
-            quadras.remove(index);
+            equipes.remove(index);
             this.saveToFile();
         }
     }
 
-    public List<Quadra> getAll() {
-        return quadras;
+    public List<Equipe> getAll() {
+        return equipes;
     }
 
-    private List<Quadra> readFromFile() {
-        quadras.clear();
-        Quadra quadra = null;
+    private List<Equipe> readFromFile() {
+        equipes.clear();
+        Equipe equipe = null;
         try (FileInputStream fis = new FileInputStream(file);
              ObjectInputStream inputFile = new ObjectInputStream(fis)) {
 
             while (fis.available() > 0) {
-                quadra = (Quadra) inputFile.readObject();
-                quadras.add(quadra);
-                maxId = (quadra.getId() > maxId) ? quadra.getId() : maxId;
+                equipe = (Equipe) inputFile.readObject();
+                equipes.add(equipe);
+                maxId = (equipe.getId() > maxId) ? equipe.getId() : maxId;
             }
         } catch (Exception e) {
             System.out.println("ERRO ao gravar produto no disco!");
             e.printStackTrace();
         }
-        return quadras;
+        return equipes;
     }
 
     private void saveToFile() {
@@ -90,8 +90,8 @@ public class QuadraDAO {
             fos = new FileOutputStream(file, false);
             outputFile = new ObjectOutputStream(fos);
 
-            for (Quadra quadra : quadras) {
-                outputFile.writeObject(quadra);
+            for (Equipe equipe : equipes) {
+                outputFile.writeObject(equipe);
             }
             outputFile.flush();
             this.close();

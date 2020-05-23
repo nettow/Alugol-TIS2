@@ -3,7 +3,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+// import java.time.LocalDateTime;
 
 
 public class Cliente implements Serializable,JsonFormatter {
@@ -15,7 +15,7 @@ public class Cliente implements Serializable,JsonFormatter {
 	private String email;
 	private String senha;
 	private int idade;
-
+	// private String[] idTimes;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;

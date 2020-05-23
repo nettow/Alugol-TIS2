@@ -1,7 +1,4 @@
 package dao;
-
-
-import model.Cliente;
 import model.Proprietario;
 
 import java.io.*;

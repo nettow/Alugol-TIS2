@@ -8,15 +8,25 @@ import java.io.Serializable;
 public class Equipe implements Serializable,JsonFormatter{
     private static final long serialVersionUID = 1L;
     private int id;
-    private int idCliente;
+    private int idDonoEquipe;
     private String nomeEquipe;
+    
+    private String[] membros;
 
-    public int getIdCliente() {
-        return idCliente;
+    public String[] getMembros() {
+        return membros;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setMembros(String[] membros) {
+        this.membros = membros;
+    }
+
+    public int getIdDonoEquipe() {
+        return idDonoEquipe;
+    }
+
+    public void setIdDonoEquipe(int idDonoEquipe) {
+        this.idDonoEquipe = idDonoEquipe;
     }
 
     public static long getSerialVersionUID() {
@@ -39,18 +49,20 @@ public class Equipe implements Serializable,JsonFormatter{
         this.nomeEquipe = nomeEquipe;
     }
 
-    public Equipe(String nome,int idCliente, int id) {
+    public Equipe(String nome,int idDonoEquipe, int id,String[] membros) {
         this.setId(id);
-        this.setIdCliente(idCliente);
+        this.setIdDonoEquipe(idDonoEquipe);
         this.setNomeEquipe(nome);
+        this.setMembros(membros);
     }
 
     @Override
     public String toString() {
         return "Time{" +
                 "id=" + id +
-                ", idCliente=" + idCliente +
+                ", IdDonoEquipe=" + idDonoEquipe +
                 ", nomeEquipe='" + nomeEquipe + '\'' +
+                ", idMembros ='" + membros + '\'' +
                 '}';
     }
 
@@ -62,10 +74,11 @@ public class Equipe implements Serializable,JsonFormatter{
     @Override
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
-        
+        System.out.println(this.getMembros());
         obj.put("nomeEquipe", this.getNomeEquipe());
-        obj.put("id", this.getId());
-        obj.put("idCliente", this.getIdCliente());
+        obj.put("idEquipe", this.getId());
+        obj.put("idDono", this.getIdDonoEquipe());
+        obj.put("membros", this.getMembros());
         
         System.out.println(obj);
 

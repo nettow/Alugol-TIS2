@@ -15,12 +15,19 @@ public class Cliente implements Serializable,JsonFormatter {
 	private String email;
 	private String senha;
 	private int idade;
-	// private String[] idTimes;
+	private String[] equipes;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
+	public String[] getEquipes(){
+		return equipes;
+	}
+
+	public void setEquipes(String[] eqp){
+		this.equipes = eqp;
+	}
 	public String getCPF() {
 		return CPF;
 	}

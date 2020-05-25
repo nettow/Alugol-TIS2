@@ -34,7 +34,7 @@ public class EquipeDAO {
             this.maxId = (equipe.getId() > this.maxId) ? equipe.getId() : this.maxId;
             this.saveToFile();
         } catch (Exception e) {
-            System.out.println("ERRO ao gravar o cliente '" + equipe.getNomeEquipe() + "' no disco!");
+            System.out.println("ERRO ao gravar a equipe '" + equipe.getNomeEquipe() + "' no disco!");
         }
     }
 
@@ -96,7 +96,7 @@ public class EquipeDAO {
             outputFile.flush();
             this.close();
         } catch (Exception e) {
-            System.out.println("ERRO ao gravar produto no disco!");
+            System.out.println("ERRO ao gravar equipe no disco!");
             e.printStackTrace();
         }
     }

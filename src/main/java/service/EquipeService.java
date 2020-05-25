@@ -2,6 +2,7 @@ package service;
 
 import com.google.gson.Gson;
 import dao.EquipeDAO;
+import dao.ClienteDAO;
 import model.Equipe;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -12,22 +13,30 @@ import java.io.IOException;
 
 public class EquipeService {
     private EquipeDAO equipeDAO;
+    private ClienteDAO clienteDAO;
 
     public EquipeService() {
         try {
             equipeDAO = new EquipeDAO("equipe.dat");
+            clienteDAO = new ClienteDAO("cliente.dat");
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
     }
 
     public Object add(Request request, Response response) {
-        // System.out.println(request.queryParams("capacidadeequipe"));
+        String[] membros = (request.queryParams("membros")).split(","); // Array de emails
         int IdCliente = Integer.parseInt(request.queryParams("idCliente"));
         String nomequipe = request.queryParams("nomeEquipe");
+        
+        String[] membrosSave = new String[3];
 
+        for (int i = 0 ; i < membros.length ; i++){
+            membrosSave[i] = clienteDAO.getNameByEmail(membros[i]);
+        }
+        System.out.println(membrosSave[0]);
         int id = equipeDAO.getMaxId() + 1;
-        Equipe equipe = new Equipe(nomequipe,IdCliente,id);
+        Equipe equipe = new Equipe(nomequipe,IdCliente,id,membrosSave);
 
         equipeDAO.add(equipe);
 
@@ -110,7 +119,7 @@ public class EquipeService {
         response.header("Content-Encoding", "UTF-8");
         JSONArray allProds = new JSONArray();
         for (Equipe equipe : equipeDAO.getAll()) {
-            if(equipe.getIdCliente()==IdCliente){
+            if(equipe.getIdDonoEquipe()==IdCliente){
                 Equipe equipe1 = equipe;
                 allProds.put(equipe1.toJson());
             }

@@ -75,6 +75,16 @@ public class ClienteDAO {
 		return -1;
 	}
 
+	// Para EquipeService
+	public String getNameByEmail(String email){
+		for(Cliente cliente : clientes){
+			if(cliente.getEmail().equals(email)){
+				return cliente.getNome();
+			}
+		}
+		return "Nome não encontrado";
+	}
+
 	public boolean verificaLogin(String email,String senha){
 		for(Cliente cliente : clientes){
 			if(cliente.getEmail().equals(email)&&cliente.getSenha().equals(senha)){
@@ -83,6 +93,7 @@ public class ClienteDAO {
 		}
 		return false;
 	}
+
 	public void update(Cliente p) {
 		int index = clientes.indexOf(p);
 		if (index != -1) {
@@ -115,7 +126,7 @@ public class ClienteDAO {
 				maxId = (cliente.getId() > maxId) ? cliente.getId() : maxId;
 			}
 		} catch (Exception e) {
-			System.out.println("ERRO ao gravar produto no disco!");
+			System.out.println("ERRO ao gravar cliente no disco!");
 			e.printStackTrace();
 		}
 		return clientes;
@@ -132,7 +143,7 @@ public class ClienteDAO {
 			outputFile.flush();
 			this.close();
 		} catch (Exception e) {
-			System.out.println("ERRO ao gravar produto no disco!");
+			System.out.println("ERRO ao gravar cliente no disco!");
 			e.printStackTrace();
 		}
 	}

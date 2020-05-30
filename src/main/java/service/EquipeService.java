@@ -29,7 +29,7 @@ public class EquipeService {
         int IdCliente = Integer.parseInt(request.queryParams("idCliente"));
         String nomequipe = request.queryParams("nomeEquipe");
         
-        String[] membrosSave = new String[3];
+        String[] membrosSave = new String[membros.length];
 
         for (int i = 0 ; i < membros.length ; i++){
             membrosSave[i] = clienteDAO.getNameByEmail(membros[i]);

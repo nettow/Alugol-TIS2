@@ -39,8 +39,7 @@ public class EquipeService {
         equipeDAO.add(equipe);
         
         for (int i = 0; i < membros.length; i++){
-            clienteService.salvaEquipe(membrosSave[i], equipe);
-            System.out.println(membrosSave[i] + "foi adicionado na equipe " + equipe.getNomeEquipe());
+            clienteDAO.salvaEquipe(membrosSave[i], equipe);
         }
 
         response.status(201); // 201 Created

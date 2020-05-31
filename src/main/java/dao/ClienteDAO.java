@@ -86,6 +86,8 @@ public class ClienteDAO {
 	}
 
 	public String salvaEquipe(String nome, Equipe eqp){
+		System.out.println(nome);
+		System.out.println(eqp.getNomeEquipe());
 		for(Cliente cliente : clientes){
 			if (cliente.getNome().equals(nome)){
 				cliente.addEquipe(eqp);

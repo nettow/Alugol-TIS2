@@ -141,7 +141,6 @@ public class ClienteService {
 	}
 
 	public Object remove(Request request, Response response) {
-		System.out.println("Entrou aqui");
         int id = Integer.parseInt(request.params(":id"));
 
 		Cliente bemDeConsumo = (Cliente) clienteDAO.get(id);

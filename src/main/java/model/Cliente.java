@@ -32,8 +32,9 @@ public class Cliente implements Serializable,JsonFormatter {
 	
 	public void addEquipe(Equipe equipe){
 		this.equipes[this.getIndice()] = equipe;
-		indiceEquipes++;
+		this.setIndice(this.getIndice() + 1);
 	}
+
 	public String getCPF() {
 		return CPF;
 	}
@@ -107,7 +108,7 @@ public class Cliente implements Serializable,JsonFormatter {
 	 */
 	@Override
 	public String toString() {
-		return "Cliente:\n"+"Nome: "+this.getNome()+"\nEmail: "+this.getEmail()+"\nCPF:"+this.getCPF()+"\nSenha: "+this.getSenha()+"\nIdade: "+this.getIdade();
+		return "Cliente:\n"+"Nome: "+this.getNome()+"\nEmail: "+this.getEmail()+"\nCPF:"+this.getCPF()+"\nSenha: "+this.getSenha()+"\nIdade: "+this.getIdade()+"\nEquipes: " +this.getEquipes();
 	}
 
 	@Override
@@ -124,6 +125,7 @@ public class Cliente implements Serializable,JsonFormatter {
 		obj.put("email", this.getEmail());
 		obj.put("senha", this.getSenha());
 		obj.put("idade", this.getIdade());
+		obj.put("equipes", this.getEquipes());
 		return obj;
 	}
 

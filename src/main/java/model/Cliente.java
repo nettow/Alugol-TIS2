@@ -15,18 +15,24 @@ public class Cliente implements Serializable,JsonFormatter {
 	private String email;
 	private String senha;
 	private int idade;
-	private String[] equipes;
+	private int indiceEquipes;
+	private Equipe[] equipes;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
-	public String[] getEquipes(){
+	public Equipe[] getEquipes(){
 		return equipes;
 	}
 
-	public void setEquipes(String[] eqp){
+	public void setEquipes(Equipe[] eqp){
 		this.equipes = eqp;
+	}
+	
+	public void addEquipe(Equipe equipe){
+		this.equipes[this.getIndice()] = equipe;
+		indiceEquipes++;
 	}
 	public String getCPF() {
 		return CPF;
@@ -34,6 +40,14 @@ public class Cliente implements Serializable,JsonFormatter {
 
 	public void setCPF(String CPF) {
 		this.CPF = CPF;
+	}
+
+	public int getIndice() {
+		return indiceEquipes;
+	}
+
+	public void setIndice(int indice) {
+		this.indiceEquipes = indice;
 	}
 
 	public int getId() {
@@ -83,6 +97,8 @@ public class Cliente implements Serializable,JsonFormatter {
 		this.setEmail(email);
 		this.setSenha(senha);
 		this.setIdade(idade);
+		this.setIndice(0);
+		this.equipes = new Equipe[5];
 	}
 
 	/**

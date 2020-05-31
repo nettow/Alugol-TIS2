@@ -1,7 +1,7 @@
 package dao;
 
 import model.Cliente;
-
+import model.Equipe;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -80,6 +80,15 @@ public class ClienteDAO {
 		for(Cliente cliente : clientes){
 			if(cliente.getEmail().equals(email)){
 				return cliente.getNome();
+			}
+		}
+		return "Nome não encontrado";
+	}
+
+	public String salvaEquipe(String nome, Equipe eqp){
+		for(Cliente cliente : clientes){
+			if (cliente.getNome().equals(nome)){
+				cliente.addEquipe(eqp);
 			}
 		}
 		return "Nome não encontrado";

@@ -3,6 +3,7 @@ package service;
 import com.google.gson.Gson;
 import dao.ClienteDAO;
 import model.Cliente;
+import model.Equipe;
 import model.LoginAux;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,6 +23,15 @@ public class ClienteService {
 		} catch (IOException e) {
 			System.out.println(e.getMessage());
 		}
+	}
+
+	public void salvaEquipe(String nome, Equipe eqp){
+		clienteDAO.salvaEquipe(nome, eqp);
+	}
+	
+	public String getNameByEmail(String email){
+		System.out.println(email);
+		return clienteDAO.getNameByEmail(email);
 	}
 
 	public boolean contaExiste(Request request){
@@ -61,6 +71,7 @@ public class ClienteService {
 			result.put("emailCliente",cliente.getEmail());
 			result.put("cpfCliente",cliente.getCPF());
 			result.put("idadeCliente",cliente.getIdade());
+			result.put("equipes",cliente.getEquipes());
 		}
 		return result;
 
@@ -102,7 +113,7 @@ public class ClienteService {
             		"</cliente>\n";
         } else {
             response.status(404); // 404 Not found
-            return "Cliente " + id + " não encontrado.";
+            return "Cliente " + id + " nï¿½o encontrado.";
         }
 
 	}
@@ -124,7 +135,7 @@ public class ClienteService {
             return id;
         } else {
             response.status(404); // 404 Not found
-            return "Bem de consumo não encontrado.";
+            return "Bem de consumo nï¿½o encontrado.";
         }
 
 	}
@@ -142,7 +153,7 @@ public class ClienteService {
         	return id;
         } else {
             response.status(404); // 404 Not found
-            return "Bem de consumo não encontrado.";
+            return "Bem de consumo nï¿½o encontrado.";
         }
 	}
 

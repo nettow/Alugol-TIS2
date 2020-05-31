@@ -2,19 +2,18 @@ package service;
 
 import com.google.gson.Gson;
 import dao.EquipeDAO;
-import dao.ClienteDAO;
 import model.Equipe;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Request;
 import spark.Response;
-
+import dao.ClienteDAO;
 import java.io.IOException;
 
 public class EquipeService {
     private EquipeDAO equipeDAO;
     private ClienteDAO clienteDAO;
-
+	private static ClienteService clienteService = new ClienteService();
     public EquipeService() {
         try {
             equipeDAO = new EquipeDAO("equipe.dat");
@@ -25,20 +24,24 @@ public class EquipeService {
     }
 
     public Object add(Request request, Response response) {
-        String[] membros = (request.queryParams("membros")).split(","); // Array de emails
+        String[] membros = (request.queryParams("membros")).split(",");
         int IdCliente = Integer.parseInt(request.queryParams("idCliente"));
         String nomequipe = request.queryParams("nomeEquipe");
         
         String[] membrosSave = new String[membros.length];
 
-        for (int i = 0 ; i < membros.length ; i++){
+        for (int i = 0 ; i < membros.length ; i++)
             membrosSave[i] = clienteDAO.getNameByEmail(membros[i]);
-        }
-        System.out.println(membrosSave[0]);
+        
         int id = equipeDAO.getMaxId() + 1;
         Equipe equipe = new Equipe(nomequipe,IdCliente,id,membrosSave);
 
         equipeDAO.add(equipe);
+        
+        for (int i = 0; i < membros.length; i++){
+            clienteService.salvaEquipe(membrosSave[i], equipe);
+            System.out.println(membrosSave[i] + "foi adicionado na equipe " + equipe.getNomeEquipe());
+        }
 
         response.status(201); // 201 Created
         return id;

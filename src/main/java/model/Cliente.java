@@ -3,7 +3,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.Serializable;
-// import java.time.LocalDateTime;
 
 
 public class Cliente implements Serializable,JsonFormatter {
@@ -15,40 +14,26 @@ public class Cliente implements Serializable,JsonFormatter {
 	private String email;
 	private String senha;
 	private int idade;
-	private int indiceEquipes;
-	private Equipe[] equipes;
+	private String equipe;
 
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
-	public Equipe[] getEquipes(){
-		return equipes;
+	public String getEquipe(){
+		return equipe;
 	}
 
-	public void setEquipes(Equipe[] eqp){
-		this.equipes = eqp;
+	public void setEquipe(String eqp){
+		this.equipe = eqp;
 	}
 	
-	public void addEquipe(Equipe equipe){
-		this.equipes[this.getIndice()] = equipe;
-		this.setIndice(this.getIndice() + 1);
-	}
-
 	public String getCPF() {
 		return CPF;
 	}
 
 	public void setCPF(String CPF) {
 		this.CPF = CPF;
-	}
-
-	public int getIndice() {
-		return indiceEquipes;
-	}
-
-	public void setIndice(int indice) {
-		this.indiceEquipes = indice;
 	}
 
 	public int getId() {
@@ -98,8 +83,7 @@ public class Cliente implements Serializable,JsonFormatter {
 		this.setEmail(email);
 		this.setSenha(senha);
 		this.setIdade(idade);
-		this.setIndice(0);
-		this.equipes = new Equipe[5];
+		this.setEquipe("Esse membro ainda não tem equipe");
 	}
 
 	/**
@@ -108,7 +92,7 @@ public class Cliente implements Serializable,JsonFormatter {
 	 */
 	@Override
 	public String toString() {
-		return "Cliente:\n"+"Nome: "+this.getNome()+"\nEmail: "+this.getEmail()+"\nCPF:"+this.getCPF()+"\nSenha: "+this.getSenha()+"\nIdade: "+this.getIdade()+"\nEquipes: " +this.getEquipes();
+		return "Cliente:\n"+"Nome: "+this.getNome()+"\nEmail: "+this.getEmail()+"\nCPF:"+this.getCPF()+"\nSenha: "+this.getSenha()+"\nIdade: "+this.getIdade()+"\nEquipe: " +this.getEquipe();
 	}
 
 	@Override
@@ -125,7 +109,7 @@ public class Cliente implements Serializable,JsonFormatter {
 		obj.put("email", this.getEmail());
 		obj.put("senha", this.getSenha());
 		obj.put("idade", this.getIdade());
-		obj.put("equipes", this.getEquipes());
+		obj.put("equipe", this.getEquipe());
 		return obj;
 	}
 

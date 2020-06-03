@@ -25,14 +25,13 @@ public class ClienteService {
 		}
 	}
 
-	public void salvaEquipe(String nome, Equipe eqp){
-		clienteDAO.salvaEquipe(nome, eqp);
-	}
+	// public void salvaEquipe(Cliente cCliente, Equipe eqp){
+	// 	clienteDAO.salvaEquipe(cCliente, eqp);
+	// }
 	
-	public String getNameByEmail(String email){
-		System.out.println(email);
-		return clienteDAO.getNameByEmail(email);
-	}
+	// public Cliente getClienteByEmail(String email){
+	// 	return clienteDAO.getClienteByEmail(email);
+	// }
 
 	public boolean contaExiste(Request request){
 		String email = request.queryParams("email");
@@ -71,7 +70,7 @@ public class ClienteService {
 			result.put("emailCliente",cliente.getEmail());
 			result.put("cpfCliente",cliente.getCPF());
 			result.put("idadeCliente",cliente.getIdade());
-			result.put("equipes",cliente.getEquipes());
+			result.put("equipes",cliente.getEquipe());
 		}
 		return result;
 
@@ -138,6 +137,13 @@ public class ClienteService {
             return "Bem de consumo n�o encontrado.";
         }
 
+	}
+
+	public void salvaEquipe(String nomeMembro,String nomeTime){
+		Cliente cliente = clienteDAO.getCliente(nomeMembro);
+		cliente.setEquipe(nomeTime);
+		System.out.println(cliente.getNome() + " foi encontrado e sua equipe definida foi: " + nomeTime);
+		clienteDAO.update(cliente);
 	}
 
 	public Object remove(Request request, Response response) {

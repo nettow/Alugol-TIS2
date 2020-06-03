@@ -39,8 +39,8 @@
             <p id="idade">Idade: </p>
             <p id="cpf"></p>
             <br><br>
-            <h3>Suas equipes:</h3>
-            <p id="equipes"></p>
+            <h3>Sua equipe:</h3><br>  
+            <h5 id="equipe"></h5>
           </div>
           <div class="w-70"></div>
           <div class="col">
@@ -99,6 +99,7 @@
         document.getElementById("nome").innerHTML  += obj.nomeCliente;
         document.getElementById("email").innerHTML  += obj.emailCliente;
         document.getElementById("idade").innerHTML  += obj.idadeCliente + " anos";
+        document.getElementById("equipe").innerHTML += obj.equipes;
         // document.getElementById("cpf").innerHTML += obj.cpfCliente;
         console.log(obj);
     }

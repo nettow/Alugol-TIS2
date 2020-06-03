@@ -74,13 +74,11 @@ public class Equipe implements Serializable,JsonFormatter{
     @Override
     public JSONObject toJson() {
         JSONObject obj = new JSONObject();
-        System.out.println(this.getMembros());
         obj.put("nomeEquipe", this.getNomeEquipe());
         obj.put("idEquipe", this.getId());
         obj.put("idDono", this.getIdDonoEquipe());
         obj.put("membros", this.getMembros());
-        
-        System.out.println(obj);
+    
 
         return obj;
     }

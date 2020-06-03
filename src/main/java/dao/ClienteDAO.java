@@ -10,7 +10,6 @@ import java.util.List;
 public class ClienteDAO {
 	private List<Cliente> clientes;
 	private int maxId = 0;
-
 	private File file;
 	private FileOutputStream fos;
 	private ObjectOutputStream outputFile;
@@ -76,24 +75,32 @@ public class ClienteDAO {
 	}
 
 	// Para EquipeService
-	public String getNameByEmail(String email){
+	public String getClienteByEmail(String email){
 		for(Cliente cliente : clientes){
 			if(cliente.getEmail().equals(email)){
 				return cliente.getNome();
 			}
 		}
-		return "Nome não encontrado";
+		return "Usuario nao existe";
 	}
 
-	public String salvaEquipe(String nome, Equipe eqp){
-		System.out.println(nome);
-		System.out.println(eqp.getNomeEquipe());
+	// public void salvaEquipe(String nome, String eqp){
+	// 	for(Cliente cliente : clientes){
+	// 		if (cliente.getNome().equals(nome)){
+	// 			System.out.println(cliente.getNome() + " foi encontrado e sua equipe definida foi: " + eqp);
+	// 			cliente.setEquipe(eqp);
+	// 			this.saveToFile();
+	// 		}
+	// 	}
+	// }
+	
+	public Cliente getCliente(String nome){
 		for(Cliente cliente : clientes){
-			if (cliente.getNome().equals(nome)){
-				cliente.addEquipe(eqp);
+			if(cliente.getNome().equals(nome)){
+				return cliente;
 			}
 		}
-		return "Nome não encontrado";
+		return null;
 	}
 
 	public boolean verificaLogin(String email,String senha){

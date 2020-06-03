@@ -3,6 +3,7 @@ package service;
 import com.google.gson.Gson;
 import dao.EquipeDAO;
 import model.Equipe;
+import model.Cliente;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Request;
@@ -13,7 +14,7 @@ import java.io.IOException;
 public class EquipeService {
     private EquipeDAO equipeDAO;
     private ClienteDAO clienteDAO;
-	private static ClienteService clienteService = new ClienteService();
+    private static ClienteService clienteService = new ClienteService();
     public EquipeService() {
         try {
             equipeDAO = new EquipeDAO("equipe.dat");
@@ -24,22 +25,26 @@ public class EquipeService {
     }
 
     public Object add(Request request, Response response) {
+        // Recebe todos os dados do formulario
         String[] membros = (request.queryParams("membros")).split(",");
         int IdCliente = Integer.parseInt(request.queryParams("idCliente"));
         String nomequipe = request.queryParams("nomeEquipe");
         
-        String[] membrosSave = new String[membros.length];
-
+        // Array de string para salvar o nome dos membros da equipe
+        String[] membrosSave = new String[2];
+        // Busca pelo e-mail e retorna o nome, salvando no array de string
         for (int i = 0 ; i < membros.length ; i++)
-            membrosSave[i] = clienteDAO.getNameByEmail(membros[i]);
-        
+            membrosSave[i] = clienteDAO.getClienteByEmail(membros[i]);
+    
         int id = equipeDAO.getMaxId() + 1;
-        Equipe equipe = new Equipe(nomequipe,IdCliente,id,membrosSave);
 
+        // Cria e salva a equipe, enviando nome, id do criador, id da equipe e array de nome de membros
+        Equipe equipe = new Equipe(nomequipe,IdCliente,id,membrosSave);
         equipeDAO.add(equipe);
         
+        // Envia os nomes dos membros da equipe e o nome da equipe para settar a equipe aos membros
         for (int i = 0; i < membros.length; i++){
-            clienteDAO.salvaEquipe(membrosSave[i], equipe);
+            clienteService.salvaEquipe(membrosSave[i], equipe.getNomeEquipe());
         }
 
         response.status(201); // 201 Created

@@ -84,15 +84,15 @@ public class ClienteDAO {
 		return "Usuario nao existe";
 	}
 
-	// public void salvaEquipe(String nome, String eqp){
-	// 	for(Cliente cliente : clientes){
-	// 		if (cliente.getNome().equals(nome)){
-	// 			System.out.println(cliente.getNome() + " foi encontrado e sua equipe definida foi: " + eqp);
-	// 			cliente.setEquipe(eqp);
-	// 			this.saveToFile();
-	// 		}
-	// 	}
-	// }
+//	 public void salvaEquipe(String nome, String eqp){
+//	 	for(Cliente cliente : clientes){
+//	 		if (cliente.getNome().equals(nome)){
+//	 			System.out.println(cliente.getNome() + " foi encontrado e sua equipe definida foi: " + eqp);
+//	 			cliente.setEquipe(eqp);
+//	 			this.saveToFile();
+//	 		}
+//	 	}
+//	 }
 	
 	public Cliente getCliente(String nome){
 		for(Cliente cliente : clientes){
@@ -118,6 +118,7 @@ public class ClienteDAO {
 			clientes.set(index, p);
 			this.saveToFile();
 		}
+		System.out.println("O cliente: " + p.getNome() + " foi atualizado. " + p.getEquipe());
 	}
 
 	public void remove(Cliente p) {

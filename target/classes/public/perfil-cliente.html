@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Alugol - Perfil do jogador</title>
+  <title>Alugol - Perfil</title>
 
   <!-- Bootstrap core CSS -->
   <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -22,7 +22,7 @@
   <!-- Navigation -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <a class="navbar-brand js-scroll-trigger" href="#page-top">AluGol - Perfil do Jogador</a>
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">AluGol - Perfil</a>
     </div>
   </nav>
 
@@ -31,26 +31,27 @@
       <div class="container">
         <div class="row">
           <div class="col">
-            <h2 id="nome">Bem vindo(a), </h2><br>
-            <img src="./imgs/user.png" class="img-thumbnail" alt="Foto do usuario" width="100px">
+            <h2 id="nome" class="display-4">Bem vindo(a), </h2><br>
+            <img src="./imgs/user.png" class="img-thumbnail" alt="Foto do usuario" width="150px">
             <br><br>
-            <p class="text-danger">Sempre mantenha seus dados atualizados</p>
-            <p id="email">E-mail: </p>
-            <p id="idade">Idade: </p>
-            <p id="cpf"></p>
+<!--            <p class="text-danger">Sempre mantenha seus dados atualizados</p>-->
+            <p id="email"><strong>E-mail:  </strong> </p>
+            <p id="idade"><strong>Idade:  </strong> </p>
+            <p id="cpf"><strong>CPF:  </strong></p>
             <br><br>
-            <h3>Sua equipe:</h3><br>  
+            <h3 class="display-4">Sua equipe:</h3><br>
             <h5 id="equipe"></h5>
           </div>
           <div class="w-70"></div>
           <div class="col">
-            <button class="btn btn-dark" onclick="location.href= './catalogo.html'">Procurar quadras</button>
-            <br><br>
-            <button class="btn btn-dark" onclick="location.href= './cadastrar-equipe.html'">Cadastrar equipes</button>
-            <br><br>
-            <button class="btn btn-dark" onclick="location.href='./editar-perfil'">Editar perfil</button>
-            <br><br>
-            <button class="btn btn-dark" onclick="fazerLogout()">Encerrar sessão</button>
+            <br>
+            <button class="btn btn-success text-white" onclick="location.href= './catalogo.html'"><strong>Procurar quadras</strong></button>
+            <br><br><br>
+            <button class="btn btn-success text-white" onclick="location.href= './cadastrar-equipe.html'"><strong>Cadastrar equipes</strong></button>
+            <br><br><br>
+<!--            <button class="btn btn-success text-white" onclick="location.href='./editar-perfil'"><strong>Editar perfil</strong></button>-->
+<!--            <br><br>-->
+            <button class="btn btn-success text-white" onclick="fazerLogout()"><strong>Encerrar sessão</strong></button>
             <p class="times"></p>
           </div>
         </div>
@@ -63,10 +64,11 @@
   <section id="services" class="bg-light">
     <div class="container">
       <div class="row">
-        <div class="col-lg-8 mx-auto">
-          <h2>Histórico de aluguel</h2>
-          <p class="lead">Estamos implementando essa nova feature!!!(Sprint 6)</p>
-        </div>
+          <h2 class="display-4">Histórico de aluguel:</h2>
+      </div>
+
+      <div>
+        <p>Estamos implementando essa feature ! </p>
       </div>
     </div>
   </section>
@@ -75,7 +77,6 @@
   <footer class="py-4 bg-dark">
       <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
   </footer>
-
   <!-- Bootstrap core JavaScript -->
   <script src="./css/vendor/jquery/jquery.min.js"></script>
   <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -96,11 +97,12 @@
     http.onload = function() {
         var dados = http.response;
         var obj = JSON.parse(dados);
+        console.log(obj);
         document.getElementById("nome").innerHTML  += obj.nomeCliente;
         document.getElementById("email").innerHTML  += obj.emailCliente;
         document.getElementById("idade").innerHTML  += obj.idadeCliente + " anos";
         document.getElementById("equipe").innerHTML += obj.equipes;
-        // document.getElementById("cpf").innerHTML += obj.cpfCliente;
+        document.getElementById("cpf").innerHTML += obj.cpfCliente;
         console.log(obj);
     }
   }

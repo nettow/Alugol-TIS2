@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AluGol - Finalizar Aluguel</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="carregaResultado()">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-success bg-success fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="./perfil-cliente.html">Voltar para o perfil</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-success text-white">
+    <div class="container text-center col-lg-8">
+        <h1>Aqui você finaliza seu aluguel</h1>
+    </div>
+
+</header>
+
+<section id="filter">
+    <div class="container">
+        <div class="row">
+            <h2>Escolha os campos que deseja editar</h2>
+            <div class="col-lg-8 mx-auto">
+                <form class="form--register" id="form-add">
+
+                    <p>ID Cliente: </p>
+                    <input class="form-control input--register" readonly="readonly" id="idCliente" type="text" name="idCliente"/>
+                    <br>
+                    <p>Nome quadra: </p>
+                    <input class="form-control input--register"  readonly="readonly" id="nomeQuadra" type="text" name="nomeQuadra"/>
+                    <br>
+                    <p>Modalidade</p>
+                    <input class="form-control input--register" id="modalidade" readonly="readonly" type="text" name="modalidade" >
+                    <br>
+                    <p>Imagem do espaço</p>
+                    <img src="" id="linkImagem" name="linkImagem" >
+                    <br><br><br><br><br><br>
+                    <p>Capacidade máxima de pessoas no espaço</p>
+                    <input class="form-control input--register" id="capacidadeQuadra" readonly="readonly" type="text" name="capacidadeQuadra" placeholder="36">
+                    <br>
+                    <p>Descrição</p>
+                    <input class="form-control input--register" id="descricaoQuadra" readonly="readonly" type="text" name="descricaoQuadra">
+                    <br>
+                    <p>Valor do Aluguel</p>
+                    <input class="form-control input--register" id="valorReserva" readonly="readonly" type="text" name="valorReserva">
+                    <br>
+                    <p>Data e Hora: </p>
+                    <input type="datetime-local" id="dataEHora" min="2020-06-08T00:00">
+                    <br>
+                    <input type="button"
+                           value="Finalizar Aluguel" class="btn btn-success input--main__style input--button" onclick="finalizarAluguel()">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="py-5 bg-success">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="./css/vendor/jquery/jquery.min.js"></script>
+<script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+<script>
+  var request = new XMLHttpRequest();
+    function carregaResultado(){
+
+        var idQuadra = sessionStorage.getItem('idQuadraDetalhe');
+        var requestURL = 'http://localhost:6789/recuperaDetalhesQuadra/'+idQuadra;
+
+        request.open('GET', requestURL,true);
+        request.responseType = 'json';
+        request.send();
+        request.onload = carregaPagina;
+    }
+
+  function carregaPagina(){
+    var dadosQuadra = request.response;
+    console.log(dadosQuadra);
+    document.getElementById("idCliente").value = sessionStorage.getItem('idCliente');
+    document.getElementById("nomeQuadra").value = dadosQuadra.nomeQuadra;
+    document.getElementById("linkImagem").src = dadosQuadra.urlEspaco;
+    document.getElementById("capacidadeQuadra").value = dadosQuadra.capacidade;
+    document.getElementById("descricaoQuadra").value = dadosQuadra.descricao;
+    document.getElementById("valorReserva").value = dadosQuadra.valorReserva;
+    document.getElementById("modalidade").value = dadosQuadra.modalidade;
+
+  }
+  var http = new XMLHttpRequest();
+  function finalizarAluguel(){
+   const idCliente = document.getElementById("idCliente").value;
+   const idQuadra = sessionStorage.getItem('idQuadraDetalhe');
+   const valorAluguel = document.getElementById("valorReserva").value;
+   const dataEHora = document.getElementById("dataEHora").value;
+   var data = {};
+   data.idCliente = idCliente;
+   data.idQuadra = idQuadra;
+   data.valorAluguel = valorAluguel;
+   data.dataEHora  = dataEHora;
+   var json = JSON.stringify(data);
+   console.log(json);
+   http = new XMLHttpRequest();
+   var requestURL = 'http://localhost:6789/aluguel';
+   http.open('POST', requestURL,true);
+   http.send(json);
+   http.onload = resultAluguel;
+  }
+
+
+  function resultAluguel(){
+    var response = http.response;
+    console.log(response);
+
+    if(response.aluguelFeito){
+        alert('Aluguel feito com sucesso!!!');
+    }
+    else if(!response.aluguelFeito)
+    {
+        alert('Infelizmente a quadra ja esta alugada nesse horario! Tente em outro dia ou horario por favor!');
+    }
+  }
+
+</script>
+</html>

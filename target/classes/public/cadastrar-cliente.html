@@ -35,67 +35,39 @@
 
   <header class="bg-success text-white">
     <div class="container text-center col-lg-8">
-      <h1>Cadastre-se no Alugol !</h1>
+      <h1 class="display-4">Cadastre-se no Alugol !</h1>
     </div>
 
   </header>
-  <!-- <section class="section--container__responsive">
-
-		<section class="section--mainrow__responsive first--section">
-			<h1 class="generaltext">Cadastramento de Clientes</h1>
-			<p>Cadastramento de cliente através de web service.</p>
-			<form class="form--register"
-				  action="http://localhost:6789/clientes" method="post"
-				  id="form-add">
-				<p>Nome:</p>
-				<input class="input--register" type="text" name="nome" value=""
-					   placeholder="Matheus">
-				<p>CPF :</p>
-				<input class="input--register" type="text" name="CPF" value=""
-					   placeholder="1234567788">
-				<p>Email:</p>
-				<input class="input--register" type="text" name="email" value="">
-				<p>Senha:</p>
-				<input class="input--register" type="text" name="senha"
-					   value="">
-				<p>Idade: </p>
-				<input class="input--register" type="number" name="idade"
-					   value="" placeholder="18 anos">
-				<input type="submit"
-					   value="cadastrar" class="input--main__style input--button">
-			</form>
-		</section>
-
-	</section> -->
   <section id="filter">
     <div class="container">
       <div class="row">
-        <h2>Digite os campos:</h2>
+        <h2 class="display-4">Digite os campos:</h2>
         <div class="col-lg-8 mx-auto">
           <form class="form--register"
 				  action="http://localhost:6789/clientes" method="post"
 				  id="form-add">
           <p>Nome </p>
-          <input class="form-control input--register" id="myInput" type="text" name="nome" placeholder="example: John">
+          <input class="form-control input--register"  type="text" name="nome" placeholder="example: John">
           <br>
           <p>Idade</p>
-          <input class="form-control input--register" id="myInput" type="number" name="idade" placeholder="example: 25">
+          <input class="form-control input--register"  type="number" name="idade" placeholder="example: 25">
           <br>
           <p>CPF</p>
-          <input class="form-control input--register" id="myInput" type="text" name="CPF" placeholder="example: 11122233344" pattern="[0-9]{12}">
+          <input class="form-control input--register"  type="text" name="CPF" placeholder="example: 11122233344">
           <br>
           <p>E-mail</p> 
-          <input class="form-control input--register" id="myInput" type="email" name="email" placeholder="example@company.com">
+          <input class="form-control input--register"  type="email" name="email" placeholder="example@company.com">
           <br>
           <p>Telefone</p> <!-- add backend -->
-          <input class="form-control input--register" id="myInput" type="tel" name="telefone" placeholder="example: 31988223344" pattern="[0-9]{12}">
+          <input class="form-control input--register"  type="tel" name="telefone" placeholder="example: 31988223344" >
           <br>
           <p>Senha</p>
           <input class="form-control input--register" id="myInput" type="password" name="password" placeholder="*******">
           <br>
           <input type="submit"
           value="Cadastrar como esportista" class="btn btn-success input--main__style input--button">
-        </div>
+          </form></div>
       </div>
     </div>
   </section>

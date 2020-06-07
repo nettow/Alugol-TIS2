@@ -23,7 +23,7 @@
 <!-- Navigation -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+        <a class="navbar-brand js-scroll-trigger text-white" href="#page-top">Alugol</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -40,10 +40,9 @@
 
 <header class="bg-success text-white">
   <div class="container text-center col-lg-8">
-    <h1>Aqui estão suas quadras</h1>
-    <p>Você pode buscar por: Nome, endereço, modalidade . . . </p>
+    <h1 class="display-4">Aqui estão suas quadras</h1>
     <input class="form-control mr-sm-2" type="text" placeholder="Search" id="termo" name="termo" aria-label="Search"><br>
-    <button type="button" class="button btn-warning btn" onclick="procuraQuadras()">Pesquisar</button>
+    <button type="button" class="button btn-dark btn" onclick="procuraQuadras()">Pesquisar</button>
   </div>
 </header>
 
@@ -51,13 +50,11 @@
     <!-- Cards com as quadras disponiveis -->
     <div class="container" id="cardsCollection">
     </div>
-
-
 </section>
 
 
 <!-- Footer -->
-<footer class="py-5 bg-dark">
+<footer class="py-5 bg-success">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
     </div>
@@ -67,7 +64,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="./css/vendor/jquery/jquery.min.js"></script>
 <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
 <!-- Plugin JavaScript -->
 <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
@@ -110,15 +106,16 @@ function carregaQuadras() {
     <div class="card-body">
       <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
       <h5>${quadras[i].modalidade}</h5>
-      <p class="card-title text-warning">Localizacao</p>
+      <p class="card-title text-danger">Localizacao</p>
       <p class="card-text">Rua: ${quadras[i].rua}</p>
       <p class="card-text">Bairro: ${quadras[i].bairro}</p>
       <p class="card-text">Cidade: ${quadras[i].cidade}</p>
-      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-      <a class="btn btn-success" onclick="editaDadosQuadra('${quadras[i].id}','${quadras[i].idProp}','${quadras[i].nomeQuadra}','${quadras[i].urlEspaco}','${quadras[i].capacidade}','${quadras[i].resumo}','${quadras[i].descricao}','${quadras[i].valorReserva}','${quadras[i].rua}','${quadras[i].bairro}','${quadras[i].cidade}','${quadras[i].modalidade}')">Editar</a>
+      <a class="btn btn-success text-white" style="margin:5px;" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a><br>
+      <a class="btn btn-success text-white" style="margin:5px;" onclick="editaDadosQuadra('${quadras[i].id}','${quadras[i].idProp}','${quadras[i].nomeQuadra}','${quadras[i].urlEspaco}','${quadras[i].capacidade}','${quadras[i].resumo}','${quadras[i].descricao}','${quadras[i].valorReserva}','${quadras[i].rua}','${quadras[i].bairro}','${quadras[i].cidade}','${quadras[i].modalidade}')">Editar</a>
       <br>
-      <a class="btn btn-success" onclick="deletaQuadra('${quadras[i].id}')">Deletar quadra</a>
+      <a class="btn btn-success text-white" style="margin:5px;" onclick="deletaQuadra('${quadras[i].id}')">Deletar quadra</a>
     </div>
+
   </div>`;
 
  }

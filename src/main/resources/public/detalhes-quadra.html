@@ -3,80 +3,81 @@
 
 <head>
 
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-  <title>AluGol - Info Quadras</title>
+    <title>AluGol - Info Quadras</title>
 
-  <!-- Bootstrap core CSS -->
-  <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap core CSS -->
+    <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="css/scrolling-nav.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
 
 </head>
 
 <body id="page-top" onload="carregaPagina()">
 
-  <!-- Navigation -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
     <div class="container">
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <p class="nav-link js-scroll-trigger">AluGol - 2020</p>
-          </li>
-        </ul>
-      </div>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <p class="nav-link js-scroll-trigger">AluGol - 2020</p>
+                </li>
+            </ul>
+        </div>
     </div>
-  </nav>
+</nav>
 
-  <header class="bg-success text-white">
+<header class="bg-success text-white">
     <div class="container text-center col-lg-8">
-      <h1 id="titulo">Detalhes da quadra - </h1>
+        <h1 id="titulo" class="display-4">Detalhes da quadra - </h1>
     </div>
 
-  </header>
+</header>
 
 <section id="services" class="bg-light col">
     <div class="col-lg-8 content">
-        <h1 id="titulo2"></h1><br>
-        <p id="modalidade"></p>
-        <p id="valorAluguel"></p>
-        <img src="" style="max-width:300px" id="imagemQuadra"><br>
-        <p id="descricao"></p>
-        <img src="" style="max-width:300px" id="imagemQuadra">
-        <h3 class="w3-large w3-text-grey w3-hide-medium">Endereço: </h3>
-        <p id="rua"></p>
-        <p id="bairro"></p>
-        <p id="cidade"></p>
+        <h1 id="titulo2" class="display-2"></h1><br>
+        <img src="" style="max-width:500px" id="imagemQuadra"><br><br>
+        <p id="modalidade" class="display-4"></p><br>
+        <p id="valorAluguel" class="display-4"></p><br>
+        <p id="descricao" class="display-4"></p>
+        <h3 class="w3-large w3-text-grey w3-hide-medium" class="display-4">Endereço: </h3>
+        <p id="rua" class="display-4"></p>
+        <p id="bairro" class="display-4"></p>
+        <p id="cidade" class="display-4"></p>
+        <button type="button" onclick="direcionaAluguel()">ALUGAR</button>
     </div>
 </section>
 
 
-  <!-- Footer -->
-  <footer class="py-5 bg-dark">
+<!-- Footer -->
+<footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+        <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
     </div>
     <!-- /.container -->
-  </footer>
+</footer>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="./css/vendor/jquery/jquery.min.js"></script>
-  <script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="./css/vendor/jquery/jquery.min.js"></script>
+<script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Plugin JavaScript -->
-  <script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
-  <!-- Custom JavaScript for this theme -->
-  <script src="js/scrolling-nav.js"></script>
+<!-- Plugin JavaScript -->
+<script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
 
 </body>
 
 <script>
+
     var request = new XMLHttpRequest();
     function carregaPagina(){
 
@@ -89,18 +90,22 @@
         request.onload = carregaResultado;
     }
 
+    function direcionaAluguel(){
+        location.href='realiza-aluguel.html';
+    }
+
     function carregaResultado(){
         var dadosQuadra = request.response;
-        console.log(dadosQuadra.bairro);
+        console.log(dadosQuadra);
         document.getElementById("titulo").innerHTML  += dadosQuadra.nomeQuadra;
         document.getElementById("titulo2").innerHTML  += dadosQuadra.nomeQuadra;
-        document.getElementById("descricao").innerHTML  = "Sobre: "+dadosQuadra.descricao;
+        document.getElementById("descricao").innerHTML  = dadosQuadra.descricao;
         document.getElementById("imagemQuadra").src = dadosQuadra.urlEspaco;
         document.getElementById("rua").innerHTML  = dadosQuadra.rua;
         document.getElementById("bairro").innerHTML  = dadosQuadra.bairro;
         document.getElementById("cidade").innerHTML  = dadosQuadra.cidade;
         document.getElementById("modalidade").innerHTML  = "Modalidade: "+dadosQuadra.modalidade;
-        document.getElementById("valorAluguel").innerHTML  = "Valor da reserva: R$"+dadosQuadra.valorReserva ;
+        document.getElementById("valorAluguel").innerHTML  = "R$ "+dadosQuadra.valorReserva ;
     }
 
 </script>

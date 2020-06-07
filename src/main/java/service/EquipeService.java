@@ -14,7 +14,7 @@ import java.io.IOException;
 public class EquipeService {
     private EquipeDAO equipeDAO;
     private ClienteDAO clienteDAO;
-    private static ClienteService clienteService = new ClienteService();
+    private static final ClienteService clienteService = new ClienteService();
     public EquipeService() {
         try {
             equipeDAO = new EquipeDAO("equipe.dat");
@@ -25,25 +25,22 @@ public class EquipeService {
     }
 
     public Object add(Request request, Response response) {
-        // Recebe todos os dados do formulario
         String[] membros = (request.queryParams("membros")).split(",");
-        int IdCliente = Integer.parseInt(request.queryParams("idCliente"));
-        String nomequipe = request.queryParams("nomeEquipe");
-        
-        // Array de string para salvar o nome dos membros da equipe
-        String[] membrosSave = new String[2];
-        // Busca pelo e-mail e retorna o nome, salvando no array de string
+        String nomeEquipe = request.queryParams("nomeEquipe");
+        int idCliente = Integer.parseInt(request.queryParams("idCliente"));
+        int quantidadeMembros = Integer.parseInt(request.queryParams("quantidadeMembros"));
+
+        String[] membrosSave = new String[quantidadeMembros];
         for (int i = 0 ; i < membros.length ; i++)
             membrosSave[i] = clienteDAO.getClienteByEmail(membros[i]);
     
         int id = equipeDAO.getMaxId() + 1;
 
-        // Cria e salva a equipe, enviando nome, id do criador, id da equipe e array de nome de membros
-        Equipe equipe = new Equipe(nomequipe,IdCliente,id,membrosSave);
+        Equipe equipe = new Equipe(nomeEquipe,idCliente,id,membrosSave);
         equipeDAO.add(equipe);
-        
-        // Envia os nomes dos membros da equipe e o nome da equipe para settar a equipe aos membros
+
         for (int i = 0; i < membros.length; i++){
+            System.out.println(membrosSave[i]);
             clienteService.salvaEquipe(membrosSave[i], equipe.getNomeEquipe());
         }
 
@@ -61,7 +58,9 @@ public class EquipeService {
             response.header("Content-Encoding", "UTF-8");
             JSONObject result = new JSONObject();
             result.put("nomeEquipe",equipe.getNomeEquipe());
-
+            result.put("idEquipe",equipe.getId());
+            result.put("idDono",equipe.getIdDonoEquipe());
+            result.put("membros",equipe.getMembros());
             return result;
         } else {
             response.status(404); // 404 Not found
@@ -69,8 +68,6 @@ public class EquipeService {
         }
 
     }
-
-
 
     public Object update(Request request, Response response) {
         int id = Integer.parseInt(request.params(":id"));

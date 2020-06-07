@@ -54,6 +54,7 @@ public class QuadraService {
             response.header("Content-Encoding", "UTF-8");
             JSONObject result = new JSONObject();
             result.put("nomeQuadra",quadra.getNomeQuadra());
+            result.put("idQuadra",quadra.getId());
             result.put("urlEspaco",quadra.getUrlEspaco());
             result.put("capacidade",quadra.getCapacidade());
             result.put("descricao",quadra.getDescricao());

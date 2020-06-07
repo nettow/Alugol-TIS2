@@ -37,9 +37,9 @@
 
   <header>
     <div class="container  col-lg-8">
-      <h1>Pesquise uma quadra</h1>
+      <h1 class="display-4">Pesquise uma quadra</h1><br>
       <input class="form-control mr-sm-2" type="text" placeholder="Nome, endereço, esporte..." id="termo" name="termo" aria-label="Search"><br>
-      <button type="button" class="button btn-dark btn " onclick="procuraQuadras()">Pesquisar</button>
+      <button type="button" class="button btn-success btn " onclick="procuraQuadras()">Pesquisar</button>
     </div>
 
   </header>
@@ -95,7 +95,6 @@ function procuraQuadras(){
 
 function carregaQuadras() {
   var quadras = request.response;
-  console.log(quadras);
   const div = document.getElementById('cardsCollection');
   for (var i = 0; i < quadras.length;i++){
     div.innerHTML += `
@@ -109,11 +108,10 @@ function carregaQuadras() {
       <br><br>
       <p class="card-text" style="">${quadras[i].rua}, ${quadras[i].bairro}</p>
       <p class="card-text" style="">${quadras[i].cidade}</p>
-      <a class="btn btn-dark text-white" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-      <a class="btn btn-dark text-white" style="float:right;" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar</a>
+      <a class="btn btn-success text-white" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
+      <a class="btn btn-success text-white" style="float:right;" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar</a>
   </div>
 </div>`;
-    console.log(quadras[i]);
  }
 }
 
@@ -136,8 +134,8 @@ function carregaQuadrasPesquisa(){
       <br><br>
       <p class="card-text" style="">${quadras[i].rua}, ${quadras[i].bairro}</p>
       <p class="card-text" style="">${quadras[i].cidade}</p>
-      <a class="btn btn-dark text-white" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-      <a class="btn btn-dark text-white" style="float:right;" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar</a>
+      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
+      <a class="btn btn-success" style="float:right;" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar</a>
   </div>
 </div>`;
   }

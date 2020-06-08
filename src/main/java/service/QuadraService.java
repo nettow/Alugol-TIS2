@@ -21,6 +21,56 @@ public class QuadraService {
         }
     }
 
+    public String getQuadraNome(int id){
+        for (Quadra quadra : quadraDAO.getAll()) {
+            if(quadra.getId()==id){
+                Quadra quadra1 = quadra;
+                return quadra1.getNomeQuadra();
+            }
+        }
+
+        return "";
+    }
+
+    public String getRuaQuadra(int id){
+        for (Quadra quadra : quadraDAO.getAll()) {
+            if(quadra.getId()==id){
+                Quadra quadra1 = quadra;
+                return quadra1.getRua();
+            }
+        }
+
+        return "";
+    }
+
+    public String getBairroQuadra(int id){
+        for (Quadra quadra : quadraDAO.getAll()) {
+            if(quadra.getId()==id){
+                Quadra quadra1 = quadra;
+                return quadra1.getBairro();
+            }
+        }
+
+        return "";
+    }
+
+    public String getCidadeQuadra(int id){
+        for (Quadra quadra : quadraDAO.getAll()) {
+            if(quadra.getId()==id){
+                Quadra quadra1 = quadra;
+                return quadra1.getCidade();
+            }
+        }
+
+        return "";
+    }
+
+    public boolean isQuadraDoProp(int idQuadra,int idProp){
+        Quadra quadra = quadraDAO.get(idQuadra);
+        if(quadra.getIdProp()==idProp)return true;
+        else return false;
+    }
+
     public Object add(Request request, Response response) {
         System.out.println(request.queryParams("capacidadeQuadra"));
         int idProp = Integer.parseInt(request.queryParams("idProp"));

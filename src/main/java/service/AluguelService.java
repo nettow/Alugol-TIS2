@@ -2,12 +2,8 @@ package service;
 
 import com.google.gson.Gson;
 import dao.AluguelDAO;
-import dao.ClienteDAO;
-import dao.QuadraDAO;
 import model.Aluguel;
 import model.AluguelAuxiliarJson;
-import model.Cliente;
-import model.LoginAux;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Request;
@@ -62,6 +58,72 @@ public class AluguelService {
         }
         return false;
     }
+
+    public Object getAlugueisCliente(Request request,Response response){
+        int idCliente = Integer.parseInt(request.params(":id"));
+        QuadraService quadraService = new QuadraService();
+        response.header("Content-Type", "application/json");
+        response.header("Content-Encoding", "UTF-8");
+        JSONArray allAlugueis = new JSONArray();
+        String dataETime="";
+        for (Aluguel aluguel : aluguelDAO.getAll()) {
+            Aluguel aluguel1 = aluguel;
+            JSONObject result = new JSONObject();
+            if(aluguel1.getIdCliente()==idCliente){
+                result.put("nomeQuadra",quadraService.getQuadraNome(aluguel1.getIdQuadra()));
+                result.put("ruaQuadra",quadraService.getRuaQuadra(aluguel1.getIdQuadra()));
+                result.put("bairroQuadra",quadraService.getBairroQuadra(aluguel1.getIdQuadra()));
+                result.put("cidadeQuadra",quadraService.getCidadeQuadra(aluguel1.getIdQuadra()));
+                result.put("valorAluguel",aluguel1.getValorAluguel());
+                System.out.println(aluguel1.getDataEHoraAluguel());
+                dataETime = aluguel1.getDataEHoraAluguel().substring(8,10)+"/"+aluguel1.getDataEHoraAluguel().substring(5,7)+"/"+aluguel1.getDataEHoraAluguel().substring(0,4)+" as "+aluguel1.getDataEHoraAluguel().substring(11,16);
+                result.put("dataEHora",dataETime);
+                allAlugueis.put(result);
+            }
+        }
+        return allAlugueis;
+
+    }
+
+    public float getFaturamentoProprietario(int id) {
+        QuadraService quadraService = new QuadraService();
+        float sum=0.0F;
+        for (Aluguel aluguel : aluguelDAO.getAll()) {
+            Aluguel aluguel1 = aluguel;
+            if (quadraService.isQuadraDoProp(aluguel1.getIdQuadra(), id)) {
+                sum+=aluguel1.getValorAluguel();
+            }
+        }
+        return sum;
+    }
+
+    public Object getAlugueisProp(Request request,Response response){
+        int idProp = Integer.parseInt(request.params(":id"));
+        QuadraService quadraService = new QuadraService();
+        ClienteService clienteService = new ClienteService();
+        response.header("Content-Type", "application/json");
+        response.header("Content-Encoding", "UTF-8");
+        JSONArray allAlugueis = new JSONArray();
+        String dataETime="";
+        for (Aluguel aluguel : aluguelDAO.getAll()) {
+            Aluguel aluguel1 = aluguel;
+            JSONObject result = new JSONObject();
+            if(quadraService.isQuadraDoProp(aluguel1.getIdQuadra(),idProp)){
+                result.put("nomeQuadra",quadraService.getQuadraNome(aluguel1.getIdQuadra()));
+                result.put("ruaQuadra",quadraService.getRuaQuadra(aluguel1.getIdQuadra()));
+                result.put("bairroQuadra",quadraService.getBairroQuadra(aluguel1.getIdQuadra()));
+                result.put("cidadeQuadra",quadraService.getCidadeQuadra(aluguel1.getIdQuadra()));
+                result.put("valorAluguel",aluguel1.getValorAluguel());
+                dataETime = aluguel1.getDataEHoraAluguel().substring(8,10)+"/"+aluguel1.getDataEHoraAluguel().substring(5,7)+"/"+aluguel1.getDataEHoraAluguel().substring(0,4)+" as "+aluguel1.getDataEHoraAluguel().substring(11,16);
+                result.put("dataEHora",dataETime);
+                result.put("nomeCliente",clienteService.getNomeCliente(aluguel1.getIdCliente()));
+                allAlugueis.put(result);
+            }
+        }
+        return allAlugueis;
+
+    }
+
 
     public Object get(Request request, Response response) {
         int id = Integer.parseInt(request.params(":id"));

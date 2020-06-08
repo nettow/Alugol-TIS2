@@ -46,6 +46,7 @@ public class ProprietarioService {
 
 
     public Object getInfoProprietario(Request request,Response response){
+        AluguelService aluguelService = new AluguelService();
         response.header("Content-Type", "application/json");
         response.header("Content-Encoding", "UTF-8");
         int idProp = Integer.parseInt(request.params(":id"));
@@ -56,6 +57,9 @@ public class ProprietarioService {
             result.put("razaoSocial",proprietario.getRazaoSocial());
             result.put("emailProp",proprietario.getEmail());
             result.put("cpnjProp",proprietario.getCPNJ());
+            result.put("telefone",proprietario.getTelefone());
+            result.put("senha",proprietario.getSenha());
+            result.put("faturamento",aluguelService.getFaturamentoProprietario(proprietario.getId()));
         }
         return result;
     }
@@ -107,22 +111,31 @@ public class ProprietarioService {
 
     public Object update(Request request, Response response) {
         int id = Integer.parseInt(request.params(":id"));
+        Gson g = new Gson();
+        Proprietario proprietario = g.fromJson(request.body(), Proprietario.class);
 
-        Proprietario proprietario = (Proprietario) proprietarioDAO.get(id);
+        String razaoSocial = proprietario.getRazaoSocial();
+        String cpnj = proprietario.getCPNJ();
+        String email = proprietario.getEmail();
+        String senha = proprietario.getSenha();
+        String telefone = proprietario.getTelefone();
 
-        if (proprietario != null) {
-            proprietario.setCPNJ(request.queryParams("CPNJ"));
-            proprietario.setRazaoSocial(request.queryParams("razaoSocial"));
-            proprietario.setEmail(request.queryParams("email"));
-            proprietario.setSenha(request.queryParams("senha"));
 
-            proprietarioDAO.update(proprietario);
-
-            return id;
-        } else {
-            response.status(404); // 404 Not found
-            return "Proprietario não encontrado.";
+        Proprietario proprietarioAux =proprietarioDAO.get(id);
+        JSONObject result = new JSONObject();
+        if(proprietarioAux != null) {
+            proprietarioAux.setCPNJ(cpnj);
+            proprietarioAux.setRazaoSocial(razaoSocial);
+            proprietarioAux.setEmail(email);
+            proprietarioAux.setSenha(senha);
+            proprietarioAux.setTelefone(telefone);
+            proprietarioDAO.update(proprietarioAux);
+            result.put("atualizado",true);
         }
+        else {
+            result.put("atualizado",false);
+        }
+        return result;
 
     }
 

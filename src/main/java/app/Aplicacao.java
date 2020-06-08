@@ -41,18 +41,23 @@ public class Aplicacao {
             boolean contaJaExiste = clienteService.contaExiste(request);
             if(!contaJaExiste){
                 clienteService.add(request, response);
-                response.redirect("perfil-cliente.html");
+                response.redirect("login.html");
             }
             return null;
         });
 
+        get("/alugueis",(request, response) -> aluguelService.getAll(request,response));
         post("/homeCliente",(request, response) -> clienteService.loginCorreto(request,response));
+
+        get("/consultaAlugueis/:id",(request, response) -> aluguelService.getAlugueisCliente(request,response));
+
+        get("/consultaAlugueisProp/:id",(request, response) -> aluguelService.getAlugueisProp(request,response));
 
         get("/clientes",(request, response) -> clienteService.getAll(request,response));
 
         //  delete("/clientes/:id", (request, response) -> clienteService.remove(request, response));
 
-        //  post("/editarCliente/:id", (request, response) -> clienteService.update(request, response));
+        post("/editarCliente/:id", (request, response) -> clienteService.update(request, response));
 
         get("/recuperaDadosCliente/:id",(request, response) -> clienteService.getInfoCliente(request,response));
 
@@ -60,7 +65,7 @@ public class Aplicacao {
 
         post("/homeProprietario",(request, response) -> proprietarioService.loginCorreto(request,response));
 
-        //  post("/editarProprietario/:id", (request, response) -> proprietarioService.update(request, response));
+        post("/editarProprietario/:id", (request, response) -> proprietarioService.update(request, response));
 
         get("/cadastrarProprietario",(request, response) -> {
             response.redirect("cadastrar-proprietario.html");
@@ -79,6 +84,8 @@ public class Aplicacao {
         });
 
         get("/recuperaDadosProprietario/:id",(request, response) -> proprietarioService.getInfoProprietario(request,response));
+
+
 
         get("/cadastrarEspaco",(request, response) -> {
             response.redirect("cadastrar-espaco.html");

@@ -3,7 +3,6 @@ package service;
 import com.google.gson.Gson;
 import dao.ClienteDAO;
 import model.Cliente;
-import model.Equipe;
 import model.LoginAux;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,14 +24,16 @@ public class ClienteService {
 		}
 	}
 
-	// public void salvaEquipe(Cliente cCliente, Equipe eqp){
-	// 	clienteDAO.salvaEquipe(cCliente, eqp);
-	// }
-	
-	// public Cliente getClienteByEmail(String email){
-	// 	return clienteDAO.getClienteByEmail(email);
-	// }
 
+	public String getNomeCliente(int id){
+		for (Cliente cliente : clienteDAO.getAll()) {
+			Cliente cliente1 = cliente;
+			if(cliente1.getId()==id){
+				return  cliente1.getNome();
+			}
+		}
+		return "";
+	}
 	public boolean contaExiste(Request request){
 		String email = request.queryParams("email");
 		String cpf = request.queryParams("CPF");
@@ -68,9 +69,9 @@ public class ClienteService {
 		if(cliente!=null){
 			result.put("nomeCliente",cliente.getNome());
 			result.put("emailCliente",cliente.getEmail());
+			result.put("senhaCliente",cliente.getSenha());
 			result.put("cpfCliente",cliente.getCPF());
 			result.put("idadeCliente",cliente.getIdade());
-			result.put("equipes",cliente.getEquipe());
 		}
 		return result;
 
@@ -119,23 +120,30 @@ public class ClienteService {
 
 	public Object update(Request request, Response response) {
         int id = Integer.parseInt(request.params(":id"));
+		Gson g = new Gson();
+		Cliente clienteAux = g.fromJson(request.body(), Cliente.class);
 
-		Cliente cliente = (Cliente) clienteDAO.get(id);
+		String nome = clienteAux.getNome();
+		String cpf = clienteAux.getCPF();
+		String email = clienteAux.getEmail();
+		String senha = clienteAux.getSenha();
+		int idade = clienteAux.getIdade();
 
+		Cliente cliente = clienteDAO.get(id);
+		JSONObject result = new JSONObject();
         if (cliente != null) {
-        	cliente.setCPF(request.queryParams("CPF"));
-        	cliente.setNome(request.queryParams("nome"));
-        	cliente.setEmail(request.queryParams("email"));
-        	cliente.setSenha(request.queryParams("senha"));
-        	cliente.setIdade(Integer.parseInt(request.queryParams("idade")));
-
+        	cliente.setCPF(cpf);
+        	cliente.setNome(nome);
+        	cliente.setEmail(email);
+        	cliente.setSenha(senha);
+        	cliente.setIdade(idade);
         	clienteDAO.update(cliente);
-        	
-            return id;
+        	result.put("atualizado",true);
         } else {
-            response.status(404); // 404 Not found
-            return "Bem de consumo n�o encontrado.";
+        	result.put("atualizado",false);
         }
+
+        return result;
 
 	}
 

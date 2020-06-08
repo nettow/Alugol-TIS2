@@ -1,7 +1,6 @@
 package dao;
 
 import model.Cliente;
-import model.Equipe;
 
 import java.io.*;
 import java.util.ArrayList;

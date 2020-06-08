@@ -34,23 +34,23 @@
             <h2 id="nome" class="display-4">Bem vindo(a), </h2><br>
             <img src="./imgs/user.png" class="img-thumbnail" alt="Foto do usuario" width="150px">
             <br><br>
-<!--            <p class="text-danger">Sempre mantenha seus dados atualizados</p>-->
+           <p class="text-danger">Sempre mantenha seus dados atualizados</p>
             <p id="email"><strong>E-mail:  </strong> </p>
             <p id="idade"><strong>Idade:  </strong> </p>
             <p id="cpf"><strong>CPF:  </strong></p>
             <br><br>
-            <h3 class="display-4">Sua equipe:</h3><br>
-            <h5 id="equipe"></h5>
+            <!-- <h3 class="display-4">Sua equipe:</h3><br>
+            <h5 id="equipe"></h5> -->
           </div>
           <div class="w-70"></div>
           <div class="col">
             <br>
             <button class="btn btn-success text-white" onclick="location.href= './catalogo.html'"><strong>Procurar quadras</strong></button>
-            <br><br><br>
-            <button class="btn btn-success text-white" onclick="location.href= './cadastrar-equipe.html'"><strong>Cadastrar equipes</strong></button>
-            <br><br><br>
-<!--            <button class="btn btn-success text-white" onclick="location.href='./editar-perfil'"><strong>Editar perfil</strong></button>-->
-<!--            <br><br>-->
+            <br><br>
+            <button class="btn btn-success text-white" onclick="location.href= './catalogo.html'"><strong>Alugar Quadras</strong></button>
+            <br><br>
+            <button class="btn btn-success text-white" onclick="location.href='./editar-perfil-cliente.html'"><strong>Editar perfil</strong></button>
+            <br><br>
             <button class="btn btn-success text-white" onclick="fazerLogout()"><strong>Encerrar sessão</strong></button>
             <p class="times"></p>
           </div>
@@ -65,10 +65,8 @@
     <div class="container">
       <div class="row">
           <h2 class="display-4">Histórico de aluguel:</h2>
-      </div>
-
-      <div>
-        <p>Estamos implementando essa feature ! </p>
+          <br>
+          <button class="btn btn-success text-white" onclick="location.href= './consulta-alugueis-cliente.html'"><strong>Meus Alugueis</strong></button>
       </div>
     </div>
   </section>
@@ -101,7 +99,7 @@
         document.getElementById("nome").innerHTML  += obj.nomeCliente;
         document.getElementById("email").innerHTML  += obj.emailCliente;
         document.getElementById("idade").innerHTML  += obj.idadeCliente + " anos";
-        document.getElementById("equipe").innerHTML += obj.equipes;
+        // document.getElementById("equipe").innerHTML += 'Padrão';
         document.getElementById("cpf").innerHTML += obj.cpfCliente;
         console.log(obj);
     }

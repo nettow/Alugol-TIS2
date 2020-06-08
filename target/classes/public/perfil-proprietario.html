@@ -36,13 +36,16 @@
             <br><br>
             <p class="text-danger">Sempre mantenha seus dados atualizados</p>
             <p id="email">E-mail: </p>
-            <p id="cnpj">CNPJ: </p>
+            <p id="cnpj">CNPJ: </p><br><br><br><br>
+            <h1>Faturamento atual <p class="display-4" style="color:green;" id="faturamento">R$ </p></h1>
           </div>
           <div class="w-70"></div>
           <div class="col">
             <button class="btn btn-success text-white" onclick="location.href= './cadastrarEspaco'">Cadastrar espaço</button>
             <br><br>
             <button class="btn btn-success text-white" onclick="location.href= './consulta-quadras.html'">Minhas Quadras</button>
+            <br><br>
+            <button class="btn btn-success text-white" onclick="location.href= './editar-perfil-proprietario.html'">Editar Perfil</button>
             <br><br>
             <button class="btn btn-success text-white" onclick="fazerLogout()">Encerrar sessão</button>
             <p class="times"></p>
@@ -58,13 +61,12 @@
     <div class="container">
       <div class="row">
         <h2 class="display-4">Histórico de aluguel:</h2>
-      </div>
-
-      <div>
-        <p>Estamos implementando essa feature ! </p>
+        <button class="btn btn-success text-white" onclick="location.href= './consulta-alugueis-proprietario.html'">Meus alugueis</button>
+        <br><br>
       </div>
     </div>
   </section>
+
 
   <!-- Footer -->
   <footer class="py-4 bg-dark">
@@ -94,9 +96,7 @@
         document.getElementById("nome").innerHTML += obj.razaoSocial;
         document.getElementById("email").innerHTML += obj.emailProp;
         document.getElementById("cnpj").innerHTML += obj.cpnjProp;
-        // console.log(obj.razaoSocial);
-        // console.log(obj.emailProp);
-        // console.log(obj.cpnjProp);
+        document.getElementById("faturamento").innerHTML += obj.faturamento;
     }
   }
 

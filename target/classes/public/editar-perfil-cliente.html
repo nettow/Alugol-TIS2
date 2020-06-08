@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AluGol - Editar Perfil de Cliente</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="setarDados()">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Alugol</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="./perfil-cliente.html">Voltar para o perfil</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-success text-white">
+    <div class="container text-center col-lg-8">
+        <h1>Aqui você edita seu perfil</h1>
+    </div>
+
+</header>
+
+<section id="filter">
+    <div class="container">
+        <div class="row">
+            <h2 class="display-4">Escolha os campos que deseja editar</h2>
+            <div class="col-lg-8 mx-auto">
+                <br><br>
+                
+                <form class="form--register" id="form-add">
+                    <p>ID do Cliente</p>
+                    <input class="form-control input--register" readonly="readonly" id="idCliente" type="text" name="idCliente"/>
+                    <br>
+                    <p>CPF</p>
+                    <input class="form-control input--register" id="CPF" type="text" name="CPF" placeholder="000.000.000-90">
+                    <br>
+                    <p>Nome</p>
+                    <input class="form-control input--register" id="nome" type="text" name="nome" placeholder="Marcos Aparecido">
+                    <br>
+                    <p>Email</p>
+                    <input class="form-control input--register" id="email" type="text" name="email" placeholder="email@email.com.br">
+                    <br>
+                    <p>Senha</p>
+                    <input class="form-control input--register" id="senha" type="password" name="senha" placeholder="******">
+                    <br>
+                    <p>Idade</p>
+                    <input class="form-control input--register" id="idade" type="number" name="idade" placeholder="18" maxlength="2">
+                    <br>
+                    <input type="button"
+                           value="Editar dados do cliente" class="btn btn-success input--main__style input--button" onclick="editarDadosCliente()">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Footer -->
+<footer class="py-5 bg-dark">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="./css/vendor/jquery/jquery.min.js"></script>
+<script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+<!-- Plugin JavaScript -->
+<script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+<script>
+
+
+  var http = new XMLHttpRequest();
+  function setarDados(){
+    var id = sessionStorage.getItem('idCliente');
+    var requestURL = 'http://localhost:6789/recuperaDadosCliente/'+id;
+    http.open('GET', requestURL,true);
+    http.send();
+    http.onload = carregaPagina;
+
+  }
+
+
+  function carregaPagina(){
+    var response = http.response;
+    var obj = JSON.parse(response);
+    console.log(obj);
+    document.getElementById("idCliente").value = sessionStorage.getItem('idCliente');
+    document.getElementById("CPF").value = obj.cpfCliente;
+    document.getElementById("nome").value = obj.nomeCliente;
+    document.getElementById("email").value = obj.emailCliente;
+    document.getElementById("senha").value = obj.senhaCliente;
+    document.getElementById("idade").value = obj.idadeCliente;
+  }
+
+  var request = new XMLHttpRequest();
+
+  function editarDadosCliente(){
+   const cpf = document.getElementById("CPF").value;
+   const nome = document.getElementById("nome").value;
+   const email = document.getElementById("email").value;
+   const senha = document.getElementById("senha").value;
+   const idade = document.getElementById("idade").value;
+   var data = {};
+   data.id = sessionStorage.getItem('idProp');
+   data.CPF = cpf;
+   data.nome  = nome;
+   data.email = email;
+   data.senha = senha;
+   data.idade = idade;
+   var json = JSON.stringify(data);
+   console.log(json);
+   var requestURL = 'http://localhost:6789/editarCliente/'+sessionStorage.getItem('idCliente');
+   request.open('POST', requestURL,true);
+   request.send(json);
+   request.onload = resultEditar;
+  }
+
+  function resultEditar(){
+    var response = request.response;
+    var obj = JSON.parse(response);
+    if(obj.atualizado){
+        alert("Dados do cliente editados com sucesso!!");
+    }
+    else{
+        alert("Infelizmente houve um erro ao editar os dados do cliente!");
+    }
+
+    location.href="perfil-cliente.html";
+  }
+
+</script>
+</html>

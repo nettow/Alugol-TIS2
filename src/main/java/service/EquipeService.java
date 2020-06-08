@@ -3,7 +3,6 @@ package service;
 import com.google.gson.Gson;
 import dao.EquipeDAO;
 import model.Equipe;
-import model.Cliente;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import spark.Request;

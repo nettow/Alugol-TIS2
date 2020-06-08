@@ -108,8 +108,7 @@ function carregaQuadras() {
       <br><br>
       <p class="card-text" style="">${quadras[i].rua}, ${quadras[i].bairro}</p>
       <p class="card-text" style="">${quadras[i].cidade}</p>
-      <a class="btn btn-success text-white" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-      <a class="btn btn-success text-white" style="float:right;" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar</a>
+      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar ou Ver Detalhes</a>
   </div>
 </div>`;
  }
@@ -134,8 +133,7 @@ function carregaQuadrasPesquisa(){
       <br><br>
       <p class="card-text" style="">${quadras[i].rua}, ${quadras[i].bairro}</p>
       <p class="card-text" style="">${quadras[i].cidade}</p>
-      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Ver detalhes</a>
-      <a class="btn btn-success" style="float:right;" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar</a>
+      <a class="btn btn-success" onclick="verDetalhesQuadra('${quadras[i].id}')">Alugar ou Ver Detalhes</a>
   </div>
 </div>`;
   }

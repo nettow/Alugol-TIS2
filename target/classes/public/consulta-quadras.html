@@ -48,7 +48,7 @@
 
 <section id="services" class="bg-light">
     <!-- Cards com as quadras disponiveis -->
-    <div class="container" id="cardsCollection">
+    <div class="container row" id="cardsCollection">
     </div>
 </section>
 
@@ -102,7 +102,7 @@ function carregaQuadras() {
   const div = document.getElementById('cardsCollection');
 
   for (var i = 0; i <= quadras.length;i++){
-    div.innerHTML += `<div class="card" style="width: 18rem;">
+    div.innerHTML += `<div class="card" style="width: 18rem;margin:50px;">
     <div class="card-body">
       <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
       <h5>${quadras[i].modalidade}</h5>
@@ -129,7 +129,7 @@ function carregaQuadrasPesquisa(){
   div.innerHTML = '';
   for (var i = 0; i <= quadras.length;i++){
   if(quadras[i].nomeQuadra.indexOf(termo)!==-1){
-    div.innerHTML += `<div class="card" style="width: 18rem;">
+    div.innerHTML += `<div class="card" style="width: 18rem;margin:50px;">
     <div class="card-body">
       <h3 class="card-title">${quadras[i].nomeQuadra}</h3>
       <h5>${quadras[i].modalidade}</h5>

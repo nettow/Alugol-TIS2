@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>AluGol - Meus Alugueis</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="./css/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/scrolling-nav.css" rel="stylesheet">
+
+</head>
+
+<body id="page-top" onload="carregaPagina()">
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <div class="container">
+        <a class="navbar-brand js-scroll-trigger text-white" href="#page-top">Alugol</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link js-scroll-trigger" href="./perfil-cliente.html">Voltar para o perfil</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<header class="bg-success text-white">
+    <div class="container text-center col-lg-8">
+        <h1 class="display-4">Aqui estão seus alugueis</h1>
+    </div>
+</header>
+
+    <!-- Cards com os alugueis do cliente -->
+    <div class="container row" id="cardsCollection">
+    </div>
+
+
+<!-- Footer --><br><br><br>
+<footer class="py-5 bg-success">
+    <div class="container">
+        <p class="m-0 text-center text-white">Copyright &copy; Alugol 2020</p>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="./css/vendor/jquery/jquery.min.js"></script>
+<script src="./css/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Plugin JavaScript -->
+<script src="./css/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+<!-- Custom JavaScript for this theme -->
+<script src="js/scrolling-nav.js"></script>
+
+</body>
+
+<script>
+
+  var request = new XMLHttpRequest();
+  var requestURL = 'http://localhost:6789/consultaAlugueis/'+sessionStorage.getItem('idCliente');
+
+function carregaPagina(){
+
+  request.open('GET', requestURL,true);
+  request.responseType = 'json';
+  request.send();
+  request.onload = carregaAlugueis;
+
+}
+
+
+
+
+function carregaAlugueis() {
+  var alugueis = request.response;
+  const div = document.getElementById('cardsCollection');
+  console.log(alugueis);
+
+  for (var i = 0; i < alugueis.length;i++){
+    div.innerHTML += `<div class="card" style="width: 18rem;margin:30px;">
+
+    <div class="card-body">
+      <h3 class="card-title">${alugueis[i].nomeQuadra}</h3><br>
+      <h4>Valor Aluguel: <p style="color:red;">R$ ${alugueis[i].valorAluguel}</p></h4><br>
+      <h4>Data do aluguel: ${alugueis[i].dataEHora}</h4><br>
+      <p>${alugueis[i].ruaQuadra}, ${alugueis[i].bairroQuadra}, ${alugueis[i].cidadeQuadra}</p>
+    </div>
+  </div>`;
+
+ }
+
+
+}
+
+
+
+  </script>
+</html>

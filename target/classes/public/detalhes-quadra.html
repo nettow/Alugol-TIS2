@@ -35,26 +35,23 @@
 
 <header class="bg-success text-white">
     <div class="container text-center col-lg-8">
-        <h1 id="titulo" class="display-4">Detalhes da quadra - </h1>
+        <h1 id="titulo" class="display-4">Detalhes da quadra</h1>
+        <button a class="btn btn-dark" type="button" onclick="direcionaAluguel()">ALUGAR</button>
     </div>
 
 </header>
 
-<section id="services" class="bg-light col">
-    <div class="col-lg-8 content">
+    <div class="col-lg-8 content container">
         <h1 id="titulo2" class="display-2"></h1><br>
-        <img src="" style="max-width:500px" id="imagemQuadra"><br><br>
+        
+        <img src="" style="max-width:500px;" id="imagemQuadra"><br><br>
         <p id="modalidade" class="display-4"></p><br>
         <p id="valorAluguel" class="display-4"></p><br>
         <p id="descricao" class="display-4"></p>
         <h3 class="w3-large w3-text-grey w3-hide-medium" class="display-4">Endereço: </h3>
-        <p id="rua" class="display-4"></p>
-        <p id="bairro" class="display-4"></p>
-        <p id="cidade" class="display-4"></p>
-        <button type="button" onclick="direcionaAluguel()">ALUGAR</button>
+        <p id="endereco" class="display-4"></p>
+        <button a class="btn btn-success" type="button" onclick="direcionaAluguel()">ALUGAR</button><br><br>
     </div>
-</section>
-
 
 <!-- Footer -->
 <footer class="py-5 bg-dark">
@@ -97,13 +94,14 @@
     function carregaResultado(){
         var dadosQuadra = request.response;
         console.log(dadosQuadra);
-        document.getElementById("titulo").innerHTML  += dadosQuadra.nomeQuadra;
+        // document.getElementById("titulo").innerHTML  += dadosQuadra.nomeQuadra;
         document.getElementById("titulo2").innerHTML  += dadosQuadra.nomeQuadra;
         document.getElementById("descricao").innerHTML  = dadosQuadra.descricao;
         document.getElementById("imagemQuadra").src = dadosQuadra.urlEspaco;
-        document.getElementById("rua").innerHTML  = dadosQuadra.rua;
-        document.getElementById("bairro").innerHTML  = dadosQuadra.bairro;
-        document.getElementById("cidade").innerHTML  = dadosQuadra.cidade;
+
+        var endereco = dadosQuadra.rua + ', ' + dadosQuadra.bairro + ', ' + dadosQuadra.cidade;
+        document.getElementById("endereco").innerHTML  = endereco;
+
         document.getElementById("modalidade").innerHTML  = "Modalidade: "+dadosQuadra.modalidade;
         document.getElementById("valorAluguel").innerHTML  = "R$ "+dadosQuadra.valorReserva ;
     }

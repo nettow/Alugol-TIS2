@@ -72,6 +72,7 @@ public class ClienteService {
 			result.put("senhaCliente",cliente.getSenha());
 			result.put("cpfCliente",cliente.getCPF());
 			result.put("idadeCliente",cliente.getIdade());
+			result.put("equipeCliente",cliente.getEquipe());
 		}
 		return result;
 
@@ -166,7 +167,7 @@ public class ClienteService {
         	return id;
         } else {
             response.status(404); // 404 Not found
-            return "Bem de consumo n�o encontrado.";
+            return "Bem de consumo não encontrado.";
         }
 	}
 

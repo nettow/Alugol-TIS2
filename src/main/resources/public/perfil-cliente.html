@@ -39,8 +39,8 @@
             <p id="idade"><strong>Idade:  </strong> </p>
             <p id="cpf"><strong>CPF:  </strong></p>
             <br><br>
-            <!-- <h3 class="display-4">Sua equipe:</h3><br>
-            <h5 id="equipe"></h5> -->
+            <h3 class="display-4">Sua equipe:</h3><br>
+            <h5 id="equipe"></h5>
           </div>
           <div class="w-70"></div>
           <div class="col">
@@ -99,7 +99,7 @@
         document.getElementById("nome").innerHTML  += obj.nomeCliente;
         document.getElementById("email").innerHTML  += obj.emailCliente;
         document.getElementById("idade").innerHTML  += obj.idadeCliente + " anos";
-        // document.getElementById("equipe").innerHTML += 'Padrão';
+        document.getElementById("equipe").innerHTML += obj.equipeCliente;
         document.getElementById("cpf").innerHTML += obj.cpfCliente;
         console.log(obj);
     }

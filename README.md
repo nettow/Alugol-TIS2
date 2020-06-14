@@ -23,3 +23,9 @@ Para iniciar o desenvolvimento, é necessário clonar o projeto do GitHub num di
 cd "qualquer diretorio"
 git clone https://github.com/nettow/Alugol-TIS2
 ```
+
+# Telas
+# Landing page
+![alt text](https://github.com/nettow/Alugol-TIS2/blob/master/imagens/Screenshot_1.png)
+# Quadras page
+![alt text](https://github.com/nettow/Alugol-TIS2/blob/master/imagens/Screenshot_2.png)
